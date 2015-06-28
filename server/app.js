@@ -23,9 +23,9 @@ app.get('/', function(request, response) {
 });
 
 app.post('/message', function(request, response) {
-  console.log("Received message");
-  console.log(request.body.message);
-  response.send(request.body.message);
+  var text = `Received message:\n${request.body.message}`;
+  console.log(text);
+  response.send(text);
 });
 
 app.use(express.static(clientPath));
