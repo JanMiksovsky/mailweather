@@ -23,7 +23,8 @@ app.get('/', function(request, response) {
 });
 
 app.post('/message', function(request, response) {
-  var text = `Received message:\n${request.body.message}`;
+  var json = JSON.stringify(request.body, null, 2);
+  var text = `Received message:\n${json}`;
   console.log(text);
   response.send(text);
 });
