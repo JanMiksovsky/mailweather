@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var path = require('path');
 var fs = require('fs');
 
@@ -6,6 +7,9 @@ var PORT = process.env.PORT || 8000;
 
 var app = express();
 var clientPath = path.join(__dirname, '../client');
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.get('/', function(request, response) {
   loadFile(request.path, function(err, html) {
@@ -16,6 +20,12 @@ app.get('/', function(request, response) {
       response.send(html);
     }
   })
+});
+
+app.post('/message', function(request, response) {
+  console.log("Received message");
+  console.log(request.body.message);
+  response.send(request.body.message);
 });
 
 app.use(express.static(clientPath));

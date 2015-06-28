@@ -3,6 +3,7 @@
   "repository": "http://github.com/JanMiksovsky/mailweather",
   "version": "0.0.1",
   "dependencies": {
+    "body-parser": "^1.13.1",
     "cheerio": "^0.19.0",
     "express": "^4.12.4",
     "request": "^2.58.0"
