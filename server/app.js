@@ -39,8 +39,8 @@ app.get('/', function(request, response) {
 });
 
 app.post('/message', function(request, response) {
-  // let json = JSON.stringify(request.body, null, 2);
-  // console.log(json);
+  let json = JSON.stringify(request.envelope, null, 2);
+  console.log(json);
   let messageFrom = request.envelope ?
     request.envelope.from :
     'jan@miksovsky.com';
