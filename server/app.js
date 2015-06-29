@@ -58,6 +58,7 @@ app.post('/message', function(request, response) {
       text: text
   };
   sendMessage(message);
+  response.send(text);
 });
 
 app.use(express.static(clientPath));
