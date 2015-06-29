@@ -3,10 +3,23 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let parseLocation = require('../server/parseLocation');
+let nodemailer = require('nodemailer');
 let path = require('path');
 let fs = require('fs');
 
 let PORT = process.env.PORT || 8000;
+let SEND_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
+
+let transport = nodemailer.createTransport({
+  host: 'mail529.pair.com',
+  port: 465,
+  secure: true,
+  debug: true,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
 
 let app = express();
 let clientPath = path.join(__dirname, '../client');
@@ -28,14 +41,23 @@ app.get('/', function(request, response) {
 app.post('/message', function(request, response) {
   // let json = JSON.stringify(request.body, null, 2);
   // console.log(json);
-  let message = request.body.plain;
-  console.log(`Received message:\n${message}`);
-  let location = parseLocation(message);
-  let responseText = location ?
+  let messageFrom = request.envelope ?
+    request.envelope.from :
+    'jan@miksovsky.com';
+  let messageBody = request.body.plain;
+  console.log(`Received message from :\n${messageBody}`);
+  let location = parseLocation(messageBody);
+  let text = location ?
     `Found location: ${JSON.stringify(location, null, 2)}` :
-    `No location found in ${message}`;
-  console.log(responseText);
-  response.send(responseText);
+    `No location found in ${messageBody}`;
+  console.log(text);
+  var message = {
+      from: SEND_FROM,
+      to: messageFrom,
+      subject: 'Weather',
+      text: text
+  };
+  sendMessage(message);
 });
 
 app.use(express.static(clientPath));
@@ -52,4 +74,13 @@ function loadFile(relativePath, callback) {
   let filePath = path.join(clientPath, relativePath);
   console.log(filePath);
   fs.readFile(filePath, { encoding: 'utf8' }, callback);
+}
+
+function sendMessage(message) {
+  transport.sendMail(message, function(error, info){
+    if (error) {
+      return console.log(error);
+    }
+    console.log(`Message sent: ${info.response}`);
+  });
 }
