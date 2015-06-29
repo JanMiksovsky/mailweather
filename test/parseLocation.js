@@ -7,3 +7,10 @@ describe("Parse location from Apple Maps email", function() {
   assert.equal(location.latitude, 47.632939);
   assert.equal(location.longitude, -122.280175);
 });
+
+describe("Parse location from DeLorme InReach email", function() {
+  var text = "Jan Miksovsky sent this message from:\nLat 47.633082 Lon -122.280192";
+  var location = parseLocation(text);
+  assert.equal(location.latitude, 47.633082);
+  assert.equal(location.longitude, -122.280192);
+});

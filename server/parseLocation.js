@@ -1,7 +1,7 @@
 "use strict";
 
 function parseLocation(text) {
-  let locationRegex = /(-?\d+.\d+),(-?\d+.\d+)/;
+  let locationRegex = /(-?\d+.\d+)(?:,| Lon )(-?\d+.\d+)/;
   let match = text.match(locationRegex);
   let location = match && {
     latitude: match[1],
