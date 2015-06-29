@@ -1,12 +1,15 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var fs = require('fs');
+"use strict";
 
-var PORT = process.env.PORT || 8000;
+let express = require('express');
+let bodyParser = require('body-parser');
+let parseLocation = require('../server/parseLocation');
+let path = require('path');
+let fs = require('fs');
 
-var app = express();
-var clientPath = path.join(__dirname, '../client');
+let PORT = process.env.PORT || 8000;
+
+let app = express();
+let clientPath = path.join(__dirname, '../client');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -19,14 +22,19 @@ app.get('/', function(request, response) {
       response.set('Content-Type', 'text/html');
       response.send(html);
     }
-  })
+  });
 });
 
 app.post('/message', function(request, response) {
-  var json = JSON.stringify(request.body, null, 2);
-  var text = `Received message:\n${json}`;
-  console.log(text);
-  response.send(text);
+  // let json = JSON.stringify(request.body, null, 2);
+  // console.log(json);
+  let message = request.body.plain;
+  console.log(`Received message:\n${message}`);
+  let location = parseLocation(message);
+  let responseText = location ?
+    `Found location: ${JSON.stringify(location, null, 2)}` :
+    `No location found in ${message}`;
+  response.send(responseText);
 });
 
 app.use(express.static(clientPath));
@@ -40,7 +48,7 @@ function loadFile(relativePath, callback) {
   if (relativePath === '/') {
     relativePath = 'index.html';
   }
-  var filePath = path.join(clientPath, relativePath);
+  let filePath = path.join(clientPath, relativePath);
   console.log(filePath);
   fs.readFile(filePath, { encoding: 'utf8' }, callback);
 }

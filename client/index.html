@@ -15,6 +15,11 @@
     margin: 0;
     padding: 1em;
   }
+
+  textarea {
+    height: 400px;
+    width: 600px;
+  }
   </style>
 
 </head>
@@ -23,7 +28,10 @@
   <h1>MailWeather</h1>
   <p>
     <form action="/message" method="POST">
-      <input type="text" name="message" value="Hello, world.">
+      <textarea type="text" name="plain">
+Jan Miksovsky sent this message from:
+Lat 47.633082 Lon -122.280192
+      </textarea>
       <input type="submit" value="Send">
     </form>
   </p>
