@@ -1,5 +1,13 @@
+"use strict";
+
 function parseLocation(text) {
-  return text.length;
+  let locationRegex = /(-?\d+.\d+),(-?\d+.\d+)/;
+  let match = text.match(locationRegex);
+  let location = match && {
+    latitude: match[1],
+    longitude: match[2]
+  };
+  return location;
 }
 
 module.exports = parseLocation;
