@@ -34,6 +34,7 @@ app.post('/message', function(request, response) {
   let responseText = location ?
     `Found location: ${JSON.stringify(location, null, 2)}` :
     `No location found in ${message}`;
+  console.log(responseText);
   response.send(responseText);
 });
 
