@@ -47,18 +47,18 @@ app.post('/message', function(request, response) {
   let messageBody = request.body.plain;
   console.log(`Received message from :\n${messageBody}`);
   let location = parseLocation(messageBody);
-  let text = location ?
+  let result = location ?
     `Found location: ${JSON.stringify(location, null, 2)}` :
-    `No location found in ${messageBody}`;
-  console.log(text);
+    `No location found`;
+  console.log(result);
   var message = {
       from: SEND_FROM,
       to: messageFrom,
       subject: 'Weather',
-      text: text
+      text: result
   };
   sendMessage(message);
-  response.send(text);
+  response.send(result + '\n\n' + json);
 });
 
 app.use(express.static(clientPath));
