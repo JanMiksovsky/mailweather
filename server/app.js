@@ -44,7 +44,7 @@ app.post('/message', function(request, response) {
   let messageFrom = request.envelope ?
     request.envelope.from :
     'jan@miksovsky.com';
-  let receivedBody = request.body.plain;
+  let receivedBody = request.body.html || request.body.plain;
   console.log(`Received message from :\n${receivedBody}`);
   let location = parseLocation(receivedBody);
   let result = location ?
