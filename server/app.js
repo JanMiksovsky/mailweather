@@ -3,12 +3,13 @@
 let express = require('express');
 let bodyParser = require('body-parser');
 let parseLocation = require('../server/parseLocation');
+let forecastIo = require('./forecastIo');
 let nodemailer = require('nodemailer');
 let path = require('path');
 let fs = require('fs');
 
 let PORT = process.env.PORT || 8000;
-let SEND_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
+let REPLY_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
 
 let transport = nodemailer.createTransport({
   host: 'mail529.pair.com',
@@ -38,33 +39,48 @@ app.get('/', function(request, response) {
 });
 
 app.post('/message', function(request, response) {
-  let json = JSON.stringify(request.body, null, 2);
-  console.log(json);
-  let messageFrom = request.envelope ?
-    request.envelope.from :
-    'jan@miksovsky.com';
-  let receivedBody = request.body.html || request.body.plain;
-  console.log(`Received message from :\n${receivedBody}`);
-  let location = parseLocation(receivedBody);
-  let result = location ?
-    `Found location: ${JSON.stringify(location, null, 2)}` :
-    `No location found`;
-  console.log(result);
-  var sendBody = result + '\n\n__________\n\n' + receivedBody;
-  var message = {
-      from: SEND_FROM,
-      to: messageFrom,
-      subject: 'Weather',
-      text: sendBody
-  };
-  sendMessage(message);
-  response.send(sendBody);
+  let incoming = parseMessageRequest(request);
+  constructReply(incoming)
+  .then(function(outgoing) {
+    var body = `${outgoing.body}\n\n__________\n\n${incoming.body}`;
+    var subject = outgoing.subject;
+    var message = {
+        from: REPLY_FROM,
+        to: incoming.from,
+        subject: subject,
+        text: body
+    };
+    sendMessage(message);
+    response.send(body);
+  });
 });
 
 let clientPath = path.join(__dirname, '../client');
 app.use(express.static(clientPath));
 app.listen(PORT);
 console.log(`Listening on port :${PORT}`);
+
+
+function constructReply(incoming) {
+
+  let location = parseLocation(incoming.body);
+
+  if (!location) {
+    // No location found
+    Promise.resolve({
+      subject: "Weather: no location found",
+      body: "No location could be found in the original message below."
+    });
+  }
+
+  return forecastIo.getForecast(location)
+  .then(function(forecast) {
+    return {
+      subject: `Weather for ${location.latitude},${location.longitude}`,
+      body: forecast
+    };
+  });
+}
 
 /*
  * Return a promise for the file at the given path.
@@ -88,7 +104,22 @@ function loadFile(relativePath) {
   });
 }
 
+function parseMessageRequest(request) {
+  let messageFrom = request.envelope ?
+    request.envelope.from :
+    'jan@miksovsky.com';
+  console.log(`Received message from :\n${messageFrom}`);
+  let messageBody = request.body.html || request.body.plain;
+  return {
+    from: messageFrom,
+    body: messageBody
+  };
+}
+
 function sendMessage(message) {
+  console.log("[Sending message]");
+  console.log(JSON.stringify(message, null, 2));
+  return;
   transport.sendMail(message, function(error, info){
     if (error) {
       return console.log(error);
