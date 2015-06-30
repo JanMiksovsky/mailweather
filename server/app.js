@@ -39,7 +39,7 @@ app.get('/', function(request, response) {
 });
 
 app.post('/message', function(request, response) {
-  let json = JSON.stringify(request, null, 2);
+  let json = JSON.stringify(request.body, null, 2);
   console.log(json);
   let messageFrom = request.envelope ?
     request.envelope.from :
@@ -51,7 +51,7 @@ app.post('/message', function(request, response) {
     `Found location: ${JSON.stringify(location, null, 2)}` :
     `No location found`;
   console.log(result);
-  var sendBody = result + '\n\n' + json;
+  var sendBody = result + '\n\n__________\n\n' + receivedBody;
   var message = {
       from: SEND_FROM,
       to: messageFrom,
