@@ -39,26 +39,27 @@ app.get('/', function(request, response) {
 });
 
 app.post('/message', function(request, response) {
-  let json = JSON.stringify(request.envelope, null, 2);
+  let json = JSON.stringify(request, null, 2);
   console.log(json);
   let messageFrom = request.envelope ?
     request.envelope.from :
     'jan@miksovsky.com';
-  let messageBody = request.body.plain;
-  console.log(`Received message from :\n${messageBody}`);
-  let location = parseLocation(messageBody);
+  let receivedBody = request.body.plain;
+  console.log(`Received message from :\n${receivedBody}`);
+  let location = parseLocation(receivedBody);
   let result = location ?
     `Found location: ${JSON.stringify(location, null, 2)}` :
     `No location found`;
   console.log(result);
+  var sendBody = result + '\n\n' + json;
   var message = {
       from: SEND_FROM,
       to: messageFrom,
       subject: 'Weather',
-      text: result
+      text: sendBody
   };
   sendMessage(message);
-  response.send(result + '\n\n' + json);
+  response.send(sendBody);
 });
 
 app.use(express.static(clientPath));
