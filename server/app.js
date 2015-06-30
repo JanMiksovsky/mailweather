@@ -22,20 +22,19 @@ let transport = nodemailer.createTransport({
 });
 
 let app = express();
-let clientPath = path.join(__dirname, '../client');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.get('/', function(request, response) {
-  loadFile(request.path, function(err, html) {
-    if (err) {
-      console.error(err);
-    } else {
+  loadFile(request.path)
+    .then(function(html) {
       response.set('Content-Type', 'text/html');
       response.send(html);
-    }
-  });
+    })
+    .catch(function(err) {
+      console.error(err);
+    });
 });
 
 app.post('/message', function(request, response) {
@@ -62,20 +61,31 @@ app.post('/message', function(request, response) {
   response.send(sendBody);
 });
 
+let clientPath = path.join(__dirname, '../client');
 app.use(express.static(clientPath));
 app.listen(PORT);
 console.log(`Listening on port :${PORT}`);
 
 /*
- * Return the file for the given path.
+ * Return a promise for the file at the given path.
  */
-function loadFile(relativePath, callback) {
+function loadFile(relativePath) {
   if (relativePath === '/') {
     relativePath = 'index.html';
   }
   let filePath = path.join(clientPath, relativePath);
   console.log(filePath);
-  fs.readFile(filePath, { encoding: 'utf8' }, callback);
+  return new Promise(function(resolve, reject) {
+
+    fs.readFile(filePath, { encoding: 'utf8' }, function(err, data) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(data);
+      }
+    });
+
+  });
 }
 
 function sendMessage(message) {
