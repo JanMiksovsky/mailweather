@@ -43,7 +43,7 @@ app.post('/message', function(request, response) {
   let body;
   constructReply(incoming)
   .then(function(outgoing) {
-    body = `${outgoing.body}\n\n__________\n\n${incoming.body}`;
+    body = outgoing.body;
     let subject = outgoing.subject;
     let message = {
         from: REPLY_FROM,
@@ -83,9 +83,10 @@ function constructReply(incoming) {
 
   return forecastIo.getForecast(location)
   .then(function(forecast) {
+    let outgoingBody = `${forecast}\n\n${location.latitude},${location.longitude}`;
     return {
       subject: `Weather for ${location.latitude},${location.longitude}`,
-      body: forecast
+      body: outgoingBody
     };
   });
 }
