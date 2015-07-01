@@ -50,7 +50,7 @@ app.post('/message', function(request, response) {
         subject: subject,
         text: body
     };
-    sendMessage(message);
+    // sendMessage(message);
     response.send(body);
   });
 });

@@ -108,10 +108,10 @@ function getForecast(location) {
   console.log(`Getting forecast: ${url}`);
   return request(url)
   .then(function(response) {
-    var data = JSON.parse(response);
-    var hourly = data.hourly;
+    let forecast = JSON.parse(response);
     console.log("Got forecast");
-    return JSON.stringify(hourly);
+    let formatted = format(forecast);
+    return formatted;
   });
 }
 
