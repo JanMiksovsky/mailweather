@@ -19,13 +19,15 @@ let DAYS_OF_WEEK = [
 function addHourDataToCalendar(hourData, calendar) {
   let date = getDateFromHourData(hourData);
   let day = getDayFromDate(date);
-  let calendarDay = calendar.get(day);
+  let time = day.getTime();
+  let calendarDay = calendar.get(time);
   if (!calendarDay) {
     calendarDay = {
       day: day,
       hours: []
     };
-    calendar.set(day, calendarDay);
+    console.log(`adding day for ${day}`);
+    calendar.set(time, calendarDay);
   }
   addHourDataToCalendarDay(hourData, calendarDay);
 }
@@ -42,11 +44,16 @@ function format(forecast) {
   forecast.hourly.data.forEach(function(hourData) {
     addHourDataToCalendar(hourData, calendar);
   });
+  // addHourDataToCalendar(forecast.hourly.data[0], calendar);
   return formatCalendar(calendar);
 }
 
 function formatCalendar(calendar) {
-  let formattedDays = calendar.keys().map(function(calendarDay) {
+  let calendarDays = [];
+  for (let calendarDay of calendar.values()) {
+    calendarDays.push(calendarDay);
+  }
+  let formattedDays = calendarDays.map(function(calendarDay) {
     return formatCalendarDay(calendarDay);
   });
   return formattedDays.join('\n');
@@ -56,30 +63,35 @@ function formatCalendarDay(calendarDay) {
   let day = calendarDay.day;
   let dayOfWeek = DAYS_OF_WEEK[day.getDay()];
   let result = `${dayOfWeek}\n`;
-  let formattedHours = calendarDay.hours.map(function(temperature, hour) {
-    return formatHour(hour, temperature);
+  let formattedHours = [];
+  calendarDay.hours.forEach(function(temperature, hour) {
+    if (temperature) {
+      formattedHours.push(formatHour(hour, temperature));
+    }
   });
   result += formattedHours.join('\n');
   return result;
 }
 
 function formatHour(hour, temperature) {
-  return `${hour} ${temperature}°`;
+  let meridiem = hour < 12 ? 'a' : 'p';
+  let formattedHour = hour % 12;
+  if (formattedHour === 0) {
+    formattedHour = 12;
+  } else if (formattedHour < 10) {
+    formattedHour = ` ${formattedHour}`;
+  }
+  let formattedTemperature = Math.round(temperature);
+  return `${formattedHour}${meridiem} ${formattedTemperature}°`;
 }
 
 function getDateFromHourData(hourData) {
-  let date = new Date();
-  let milliseconds = hourData.time * 1000;
-  date.setTime(milliseconds);
-  return date;
+  return new Date(hourData.time * 1000);
 }
 
 // Return midnight on the given date.
 function getDayFromDate(date) {
-  var day = new Date();
-  day.setYear(date.getYear());
-  day.setMonth(date.getMonth());
-  day.setDate(date.getDate());
+  var day = new Date(date.getTime());
   day.setHours(0);
   day.setMinutes(0);
   day.setSeconds(0);
