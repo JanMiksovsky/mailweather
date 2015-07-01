@@ -3,48 +3,22 @@
 let fs = require('fs');
 let path = require('path');
 let assert = require('chai').assert;
+let sample = require('./sample');
 let forecastIo = require('../server/forecastIo');
 
-// describe('ForecastIO', function() {
-// 
-//   it("formats forecast from sample data", function(done) {
-//     getSampleForecast()
-//     .then(function(forecast) {
-//       let formatted = forecastIo.format(forecast);
-//       console.log(formatted);
-//       assert.equal(formatted, 'Clear');
-//       done();
-//     })
-//     .catch(function(err) {
-//       done(err);
-//     });
-//   });
-// 
-// });
+describe('ForecastIO', function() {
 
-function getSampleForecast() {
-
-  let filePath = path.join(__dirname, 'forecast.json');
-  // console.log(filePath);
-  return new Promise(function(resolve, reject) {
-
-    fs.readFile(filePath, { encoding: 'utf8' }, function(err, data) {
-      if (err) {
-        reject(err);
-      } else {
-        let json = JSON.parse(data);
-        resolve(json);
-      }
+  it("formats forecast from sample data", function(done) {
+    sample.getForecast()
+    .then(function(forecast) {
+      let formatted = forecastIo.format(forecast);
+      console.log(formatted);
+      assert.equal(formatted, 'Clear');
+      done();
+    })
+    .catch(function(err) {
+      done(err);
     });
-
   });
-}
 
-getSampleForecast()
-.then(function(forecast) {
-  let formatted = forecastIo.format(forecast);
-  console.log(formatted);
-})
-.catch(function(err) {
-  console.error(`Error: ${err}`);
 });
