@@ -6,6 +6,12 @@
 
 let request = require('request-promise');
 
+// Format a Forecast.io forecast for human presentation.
+function format(forecast) {
+  return forecast.currently.summary;
+}
+
+// Return a promise for a forecast from Forecast.io.
 function getForecast(location) {
   let apiKey = process.env.FORECAST_API_KEY;
   let latitude = location.latitude;
@@ -22,5 +28,6 @@ function getForecast(location) {
 }
 
 module.exports = {
+  format: format,
   getForecast: getForecast
 };
