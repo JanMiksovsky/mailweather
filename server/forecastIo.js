@@ -81,6 +81,9 @@ function formatHour(hour, temperature) {
   } else if (formattedHour < 10) {
     formattedHour = ` ${formattedHour}`;
   }
+  // We round the temperature to the nearest integer. Forecast.io appears to
+  // do something more complex, sometimes (but not always?) rounding down for
+  // fractions above .5. So our forecasts won't agree precisely.
   let formattedTemperature = Math.round(temperature);
   return `${formattedHour}${meridiem} ${formattedTemperature}°`;
 }

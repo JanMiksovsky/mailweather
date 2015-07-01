@@ -17,8 +17,12 @@
   }
 
   textarea {
-    height: 400px;
-    width: 600px;
+    height: 100px;
+    width: 400px;
+  }
+
+  #forecast {
+    font-family: Consolas, sans-serif;
   }
   </style>
 
@@ -29,12 +33,14 @@
   <p>
     <form action="/message" method="POST">
       <textarea type="text" name="plain">
-Jan Miksovsky sent this message from:
-Lat 47.633082 Lon -122.280192
+47.6329,-122.2800
       </textarea>
       <input type="submit" value="Send">
     </form>
   </p>
+  <pre id="forecast">
+<!-- Forecast goes here -->
+  </pre>
 </body>
 
 </html>

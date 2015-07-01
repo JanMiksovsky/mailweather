@@ -40,18 +40,26 @@ app.get('/', function(request, response) {
 
 app.post('/message', function(request, response) {
   let incoming = parseMessageRequest(request);
+  let body;
   constructReply(incoming)
   .then(function(outgoing) {
-    var body = `${outgoing.body}\n\n__________\n\n${incoming.body}`;
-    var subject = outgoing.subject;
-    var message = {
+    body = `${outgoing.body}\n\n__________\n\n${incoming.body}`;
+    let subject = outgoing.subject;
+    let message = {
         from: REPLY_FROM,
         to: incoming.from,
         subject: subject,
         text: body
     };
     // sendMessage(message);
-    response.send(body);
+    return loadFile('/');
+  })
+  .then(function(html) {
+    // Splice in forecast.
+    let placeholder = '<!-- Forecast goes here -->';
+    html = html.replace(placeholder, body);
+    response.set('Content-Type', 'text/html');
+    response.send(html);
   });
 });
 
