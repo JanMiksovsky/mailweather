@@ -14,6 +14,13 @@ let DAYS_OF_WEEK = [
   'Thu',
   'Fri',
   'Sat'
+  // 'SUN',
+  // 'MON',
+  // 'TUE',
+  // 'WED',
+  // 'THU',
+  // 'FRI',
+  // 'SAT'
 ];
 
 function addHourDataToCalendar(hourData, calendar) {
@@ -34,7 +41,10 @@ function addHourDataToCalendar(hourData, calendar) {
 function addHourDataToCalendarDay(hourData, calendarDay) {
   let date = getDateFromHourData(hourData);
   let hour = date.getHours();
-  calendarDay.hours[hour] = hourData.temperature;
+  calendarDay.hours[hour] = {
+    icon: hourData.icon,
+    temperature: hourData.temperature
+  };
 }
 
 // Format a Forecast.io forecast for human presentation.
@@ -55,7 +65,7 @@ function formatCalendar(calendar) {
   let formattedDays = calendarDays.map(function(calendarDay) {
     return formatCalendarDay(calendarDay);
   });
-  return formattedDays.join('\n');
+  return formattedDays.join('\n\n');
 }
 
 function formatCalendarDay(calendarDay) {
@@ -63,17 +73,19 @@ function formatCalendarDay(calendarDay) {
   let dayOfWeek = DAYS_OF_WEEK[day.getDay()];
   let result = `${dayOfWeek}\n`;
   let formattedHours = [];
-  calendarDay.hours.forEach(function(temperature, hour) {
-    var includeHour = (hour % 3 ===0) && (hour >= 6) && (hour <= 21);
+  calendarDay.hours.forEach(function(data, hour) {
+    let includeHour = (hour % 3 ===0) && (hour >= 6) && (hour <= 21);
+    let temperature = data.temperature;
     if (temperature && includeHour) {
-      formattedHours.push(formatHour(hour, temperature));
+      let icon = data.icon;
+      formattedHours.push(formatHour(hour, temperature, icon));
     }
   });
   result += formattedHours.join('\n');
   return result;
 }
 
-function formatHour(hour, temperature) {
+function formatHour(hour, temperature, icon) {
   let meridiem = hour < 12 ? 'a' : 'p';
   let formattedHour = hour % 12;
   if (formattedHour === 0) {
@@ -85,7 +97,25 @@ function formatHour(hour, temperature) {
   // do something more complex, sometimes (but not always?) rounding down for
   // fractions above .5. So our forecasts won't agree precisely.
   let formattedTemperature = Math.round(temperature);
-  return `${formattedHour}${meridiem} ${formattedTemperature}°`;
+  let formattedIcon = formatIcon(icon);
+  return `${formattedHour}${meridiem} ${formattedTemperature}°${formattedIcon}`;
+}
+
+function formatIcon(icon) {
+  let abbreviations = {
+    "clear-day": "clear",
+    "clear-night": "clear",
+    // "cloudy": "",
+    // "fog": "",
+    "partly-cloudy-day": "partly cloudy",
+    "partly-cloudy-night": "partly cloudy",
+    // "rain": "",
+    // "sleet": "",
+    // "snow": "",
+    // "wind": ""
+  };
+  let formattedIcon = abbreviations[icon] || icon || '';
+  return formattedIcon;
 }
 
 function getDateFromHourData(hourData) {
