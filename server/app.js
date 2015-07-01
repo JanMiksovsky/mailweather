@@ -51,7 +51,7 @@ app.post('/message', function(request, response) {
         // subject: subject,
         text: body
     };
-    sendMessage(message);
+    // sendMessage(message);
     return loadFile('/');
   })
   .then(function(html) {

@@ -23,6 +23,43 @@ let DAYS_OF_WEEK = [
   // 'SAT'
 ];
 
+let ABBREVIATIONS = {
+  " at ": " ",
+  " on ": " ",
+  " the ": " ",
+  " with ": " ",
+  "Friday": "Fri",
+  "Monday": "Mon",
+  "Saturday": "Sat",
+  "Sunday": "Sun",
+  "Thursday": "Thu",
+  "Tuesday": "Tue",
+  "Wednesday": "Wed",
+  "clear-day": "clear",
+  "clear-night": "clear",
+  "falling": "fall",
+  "partly-cloudy-day": "partly cloudy",
+  "partly-cloudy-night": "partly cloudy",
+  "precipitation": "precip",
+  "rising": "rise",
+  "temperatures": "temps",
+  "throughout": "thru"
+  // "cloudy": "",
+  // "fog": "",
+  // "rain": "",
+  // "sleet": "",
+  // "snow": "",
+  // "wind": "",
+};
+
+function abbreviate(text) {
+  let result = text;
+  for (let key of Object.keys(ABBREVIATIONS)) {
+    result = result.replace(key, ABBREVIATIONS[key]);
+  }
+  return result;
+}
+
 function addHourDataToCalendar(hourData, calendar) {
   let date = getDateFromHourData(hourData);
   let day = getDayFromDate(date);
@@ -54,7 +91,10 @@ function format(forecast) {
     addHourDataToCalendar(hourData, calendar);
   });
   // addHourDataToCalendar(forecast.hourly.data[0], calendar);
-  return formatCalendar(calendar);
+  let formattedSummary = abbreviate(forecast.daily.summary);
+  let result = `${formattedSummary}\n`;
+  result += formatCalendar(calendar);
+  return result;
 }
 
 function formatCalendar(calendar) {
@@ -104,19 +144,9 @@ function formatHour(hour, temperature, icon) {
 }
 
 function formatIcon(icon) {
-  let abbreviations = {
-    "clear-day": "clear",
-    "clear-night": "clear",
-    // "cloudy": "",
-    // "fog": "",
-    "partly-cloudy-day": "partly cloudy",
-    "partly-cloudy-night": "partly cloudy",
-    // "rain": "",
-    // "sleet": "",
-    // "snow": "",
-    // "wind": ""
-  };
-  let formattedIcon = abbreviations[icon] || icon || '';
+  let formattedIcon = icon ?
+    abbreviate(icon) :
+    '';
   return formattedIcon;
 }
 
