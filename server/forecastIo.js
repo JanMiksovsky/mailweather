@@ -26,7 +26,6 @@ function addHourDataToCalendar(hourData, calendar) {
       day: day,
       hours: []
     };
-    console.log(`adding day for ${day}`);
     calendar.set(time, calendarDay);
   }
   addHourDataToCalendarDay(hourData, calendarDay);
@@ -65,7 +64,8 @@ function formatCalendarDay(calendarDay) {
   let result = `${dayOfWeek}\n`;
   let formattedHours = [];
   calendarDay.hours.forEach(function(temperature, hour) {
-    if (temperature) {
+    var includeHour = (hour % 3 ===0) && (hour >= 6) && (hour <= 21);
+    if (temperature && includeHour) {
       formattedHours.push(formatHour(hour, temperature));
     }
   });
