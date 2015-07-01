@@ -73,12 +73,14 @@ function formatCalendarDay(calendarDay) {
   let dayOfWeek = DAYS_OF_WEEK[day.getDay()];
   let result = `${dayOfWeek}\n`;
   let formattedHours = [];
+  let previousIcon = null;
   calendarDay.hours.forEach(function(data, hour) {
     let includeHour = (hour % 3 ===0) && (hour >= 6) && (hour <= 21);
     let temperature = data.temperature;
     if (temperature && includeHour) {
-      let icon = data.icon;
+      let icon = (data.icon === previousIcon) ? null : data.icon;
       formattedHours.push(formatHour(hour, temperature, icon));
+      previousIcon = data.icon;
     }
   });
   result += formattedHours.join('\n');
