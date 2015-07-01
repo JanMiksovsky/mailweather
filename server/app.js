@@ -127,7 +127,6 @@ function parseMessageRequest(request) {
 function sendMessage(message) {
   console.log("[Sending message]");
   console.log(JSON.stringify(message, null, 2));
-  return;
   transport.sendMail(message, function(error, info){
     if (error) {
       return console.log(error);
