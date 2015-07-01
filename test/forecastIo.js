@@ -11,12 +11,12 @@ describe('ForecastIO', function() {
     getSampleForecast()
     .then(function(forecast) {
       let formatted = forecastIo.format(forecast);
-      console.log('here');
-      assert.equal(formatted, 'foo');
+      console.log(formatted);
+      assert.equal(formatted, 'Clear');
       done();
     })
-    .catch(function(error) {
-      throw error;
+    .catch(function(err) {
+      done(err);
     });
   });
 
