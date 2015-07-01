@@ -48,10 +48,10 @@ app.post('/message', function(request, response) {
     let message = {
         from: REPLY_FROM,
         to: incoming.from,
-        subject: subject,
+        // subject: subject,
         text: body
     };
-    // sendMessage(message);
+    sendMessage(message);
     return loadFile('/');
   })
   .then(function(html) {
