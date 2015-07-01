@@ -6,9 +6,85 @@
 
 let request = require('request-promise');
 
+let DAYS_OF_WEEK = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat'
+];
+
+function addHourDataToCalendar(hourData, calendar) {
+  let date = getDateFromHourData(hourData);
+  let day = getDayFromDate(date);
+  let calendarDay = calendar.get(day);
+  if (!calendarDay) {
+    calendarDay = {
+      day: day,
+      hours: []
+    };
+    calendar.set(day, calendarDay);
+  }
+  addHourDataToCalendarDay(hourData, calendarDay);
+}
+
+function addHourDataToCalendarDay(hourData, calendarDay) {
+  let date = getDateFromHourData(hourData);
+  let hour = date.getHours();
+  calendarDay.hours[hour] = hourData.temperature;
+}
+
 // Format a Forecast.io forecast for human presentation.
 function format(forecast) {
-  return forecast.currently.summary;
+  let calendar = new Map();
+  forecast.hourly.data.forEach(function(hourData) {
+    addHourDataToCalendar(hourData, calendar);
+  });
+  return formatCalendar(calendar);
+}
+
+function formatCalendar(calendar) {
+  let formattedDays = calendar.keys().map(function(calendarDay) {
+    return formatCalendarDay(calendarDay);
+  });
+  return formattedDays.join('\n');
+}
+
+function formatCalendarDay(calendarDay) {
+  let day = calendarDay.day;
+  let dayOfWeek = DAYS_OF_WEEK[day.getDay()];
+  let result = `${dayOfWeek}\n`;
+  let formattedHours = calendarDay.hours.map(function(temperature, hour) {
+    return formatHour(hour, temperature);
+  });
+  result += formattedHours.join('\n');
+  return result;
+}
+
+function formatHour(hour, temperature) {
+  return `${hour} ${temperature}°`;
+}
+
+function getDateFromHourData(hourData) {
+  let date = new Date();
+  let milliseconds = hourData.time * 1000;
+  date.setTime(milliseconds);
+  return date;
+}
+
+// Return midnight on the given date.
+function getDayFromDate(date) {
+  var day = new Date();
+  day.setYear(date.getYear());
+  day.setMonth(date.getMonth());
+  day.setDate(date.getDate());
+  day.setHours(0);
+  day.setMinutes(0);
+  day.setSeconds(0);
+  day.setMilliseconds(0);
+  return day;
 }
 
 // Return a promise for a forecast from Forecast.io.
