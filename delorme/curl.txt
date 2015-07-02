@@ -1,0 +1,1 @@
+curl 'https://explore.delorme.com/TextMessage/TxtMsg' -H 'Referer: https://explore.delorme.com/textmessage/txtmsg?mo=fd14a106135547599bf488a58b142c7632505664&adr=jan%40miksovsky.com' --data 'ReplyAddress=jan%40miksovsky.com&ReplyMessage=This+is+a+curl+test.&MessageId=33201312&Guid=fd14a106-1355-4759-9bf4-88a58b142c76' --compressed
