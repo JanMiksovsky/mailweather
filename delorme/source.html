@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info = {"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"0598232902","applicationID":"1465048","transactionName":"Y1RbNxcFChdSUxANVloedDUmSzABS0QpAUpHUF4GJgsKEEFfCAhcRh5NGxEJFwM=","queueTime":0,"applicationTime":691,"ttGuid":"42A1017D26D1092D","agent":"js-agent.newrelic.com/nr-632.min.js"}</script><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"Vg8DV1FRGwIEUlRSAwk="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t){try{i.console&&console.log(t)}catch(e){}}var n,r=t("ee"),o=t(1),i={};try{n=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(i.console=!0,-1!==n.indexOf("dev")&&(i.dev=!0),-1!==n.indexOf("nr_dev")&&(i.nrDev=!0))}catch(a){}i.nrDev&&r.on("internal-error",function(t){e(t.stack)}),i.dev&&r.on("fn-err",function(t,n,r){e(r.stack)}),i.dev&&(e("NR AGENT IN DEVELOPMENT MODE"),e("flags: "+o(i,function(t){return t}).join(", ")))},{1:20,ee:"QJf3ax"}],4:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(6),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,t(3),window.onerror=e;try{throw new Error}catch(u){"stack"in u&&(t(4),t(5),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:5,2:8,3:3,4:7,5:6,6:21,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:21,2:22,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:22,2:21,ee:"QJf3ax"}],7:[function(t,e){function n(t,e,n){t[0]=o(t[0],"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:22,2:21,ee:"QJf3ax"}],8:[function(t,e){function n(){u.inPlace(this,p,"fn-")}function r(t,e){u.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}function i(t,e){for(var n in t)e[n]=t[n];return e}var a=t("ee").create(),s=t(1),c=t(2),u=c(a),f=c(s),d=window.XMLHttpRequest,p=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=a,window.XMLHttpRequest=function(t){var e=new d(t);try{a.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",o),e.addEventListener("readystatechange",n,!1)}catch(r){try{a.emit("internal-error",[r])}catch(i){}}return e},i(d,XMLHttpRequest),XMLHttpRequest.prototype=d.prototype,u.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),a.on("send-xhr-start",r),a.on("open-xhr-start",r)},{1:5,2:22,ee:"QJf3ax"}],9:[function(t){function e(t){var e=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!e.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){e.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=n(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(e.cat=d.split(", ").pop())}}else e.status=0;r.cbTime=this.cbTime,o("xhr",[e,r,this.startTime])}}}function n(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=e,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,e){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=n(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{a.emit("internal-error",[n])}catch(r){}}};for(var f=0;c>f;f++)e.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:10,3:8,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],10:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split("@").pop().split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,r.protocol=o[0],"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],11:[function(t,e){function n(t){return function(){r(t,[(new Date).getTime()].concat(i(arguments)))}}var r=t("handle"),o=t(1),i=t(2);"undefined"==typeof window.newrelic&&(newrelic=window.NREUM);var a=["setPageViewName","addPageAction","setCustomAttribute","finished","addToTrace","inlineHit","noticeError"];o(a,function(t,e){window.NREUM[e]=n("api-"+e)}),e.exports=window.NREUM},{1:20,2:21,handle:"D5DuLP"}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info,e=u.getElementsByTagName("script")[0];if(t&&t.licenseKey&&t.applicationID&&e){s(d,function(e,n){e in t||(t[e]=n)});var n="https"===f.split(":")[0]||t.sslForHttp;p.proto=n?"https://":"http://",a("mark",["onload",i()]);var r=u.createElement("script");r.src=p.proto+t.agent,e.parentNode.insertBefore(r,e)}}function r(){"complete"===u.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=t(1),c=(t(2),window),u=c.document,f=(""+location).split("?")[0],d={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-632.min.js"},p=e.exports={offset:i(),origin:f,features:{}};u.addEventListener?(u.addEventListener("DOMContentLoaded",o,!1),c.addEventListener("load",n,!1)):(u.attachEvent("onreadystatechange",r),c.attachEvent("onload",n)),a("mark",["firstbyte",i()])},{1:20,2:11,handle:"D5DuLP"}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],20:[function(t,e){function n(t,e){var n=[],o="",i=0;for(o in t)r.call(t,o)&&(n[i]=e(o,t[o]),i+=1);return n}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],21:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],22:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:21,ee:"QJf3ax"}]},{},["G9z0Bl",4,9]);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="viewport" content="width=device-width" />
+<title>inReach Message from Jan Miksovsky</title>
+<link href="/content/bundle/bundle-css?v=4dEZMLsLZ9js4skcI24CjcQx7YUBaFMb_U4GFz4OtVo1" rel="stylesheet"/>
+
+<link href="/content/bundles/css-map?v=ynp-KwpCZYSn37in15L3qDVvEpwljzToSFsSfyC8OWY1" rel="stylesheet"/>
+
+<script src="/bundles/jquery?v=gRF2FkJgqMHzleWzTTgOLMc3p0F9K_eqrFCbzcn7-FY1"></script>
+
+<link href="/content/TextMessagePageFull.css" rel="stylesheet" />
+<script src="/bundles/requirejs?v=T2CqejD6PE4eki73P3lP7gJn6JSn4zBfTohbsxKtS9w1"></script>
+
+<script type="text/javascript">
+    var paths = {
+        leaflet: 'leaflet/leaflet',
+        leafletLabel: 'leaflet/leaflet.label',
+        leafletLayerDeferred: 'leaflet/Layer.Deferred',
+    };
+    if (!jQuery) {
+        paths.jquery = 'jquery-1.7.2';
+    } else {
+        define('jquery', [], function () { return jQuery; });
+    }
+
+    requirejs.config({
+        baseUrl: '/Scripts/',
+        shim: {
+            'jquery': {
+                exports: 'jQuery'
+            },
+            'leaflet': {
+                exports: 'L'
+            },
+            'leafletLabel':{
+                deps:['leaflet']
+            },
+            'leafletLayerDeferred':{
+                deps: ['leaflet']
+            },
+        },
+        paths: paths
+    });
+</script>
+<script type="text/javascript">
+    var UseRackspaceForTopo = true;
+    var TopoLayerURLs  = ['https://c2b4176cad30225d687c-7e0e650bf4a5d15bafe852139ea239f3.ssl.cf2.rackcdn.com/','https://ed502bf9b7033d790f10-bcb4af584d7d7b5ae81189047773eeda.ssl.cf2.rackcdn.com/','https://c8f6e9d4c5cd0b246a1d-8c74f583c401c84ec505b51d8bd254fa.ssl.cf2.rackcdn.com/','https://1c60879d45c0a34d1b99-54e5e7ed77bc03a8f6627beb2d82c586.ssl.cf2.rackcdn.com/','https://80a803801582279c5011-7cc42134130fbbd418a4c35c07ca9b75.ssl.cf2.rackcdn.com/','https://3257a8deeb02484de634-1d10b6426790752ac5bd134730d58b1d.ssl.cf2.rackcdn.com/','https://25abe72f02c5150cb68a-fd4a7337caf0f2b9b5498a4aa9a3e3fe.ssl.cf2.rackcdn.com/','https://742f913181b119641ae7-df496306fa8797eeaa185cf4efe46839.ssl.cf2.rackcdn.com/','https://7a5592888a7287d31c78-f6bb380e8ab4267728cd54d872eafb4a.ssl.cf2.rackcdn.com/','https://b4bf521e418a3ad6cc58-5903e31b4ba3129cc16fccd90c7e31e7.ssl.cf2.rackcdn.com/','https://4baa2db7e87b9e7d32c4-af043bdeb6a2428e08798bfa7ceaa730.ssl.cf2.rackcdn.com/','https://fc7a059c5301947fc30b-a59ab0846d982701c4e1c77147230e83.ssl.cf2.rackcdn.com/','https://4943e63257e1fdf08ca7-d5e89ad219304006eebe9c9d18e7bee4.ssl.cf2.rackcdn.com/','https://c8b4112a4026ed265e69-0e1ec122520579c383d8806557f5aaa0.ssl.cf2.rackcdn.com/','https://81b6e0ceef9000f7d78e-82ee408f0eada42189433ea0c1925883.ssl.cf2.rackcdn.com/'];
+    var TopoURL = 'https://gisservices.datadoors.net/i3_ArcGIS/__streaminguid.C08E7D96-ACE9-430C-A562-F91D02D889E5/rest/Delorme/World_Topo';
+    var RoadURL = 'https://gisservices.datadoors.net/i3_ArcGIS/__streaminguid.C08E7D96-ACE9-430C-A562-F91D02D889E5/rest/bing/roads';
+    var AerialU = 'https://gisservices.datadoors.net/i3_ArcGIS/__streaminguid.C08E7D96-ACE9-430C-A562-F91D02D889E5/rest/bing/aerialos';
+    var NO_AUTO_LOAD = true;
+    var NO_POP_BUTTONS = true;
+    var NO_EXPAND = true;
+    define('map-config',[], function () {
+        return {
+            Archived : false,
+            lat : 47.632888,
+            lon : -122.280385,
+            TopoURL : 'https://gisservices.datadoors.net/i3_ArcGIS/__streaminguid.C08E7D96-ACE9-430C-A562-F91D02D889E5/rest/Delorme/World_Topo',
+            zoom : 10,
+            replyable : true,
+            UseRackspaceForTopo : true,
+            rackSpaceURLs : ['https://c2b4176cad30225d687c-7e0e650bf4a5d15bafe852139ea239f3.ssl.cf2.rackcdn.com/','https://ed502bf9b7033d790f10-bcb4af584d7d7b5ae81189047773eeda.ssl.cf2.rackcdn.com/','https://c8f6e9d4c5cd0b246a1d-8c74f583c401c84ec505b51d8bd254fa.ssl.cf2.rackcdn.com/','https://1c60879d45c0a34d1b99-54e5e7ed77bc03a8f6627beb2d82c586.ssl.cf2.rackcdn.com/','https://80a803801582279c5011-7cc42134130fbbd418a4c35c07ca9b75.ssl.cf2.rackcdn.com/','https://3257a8deeb02484de634-1d10b6426790752ac5bd134730d58b1d.ssl.cf2.rackcdn.com/','https://25abe72f02c5150cb68a-fd4a7337caf0f2b9b5498a4aa9a3e3fe.ssl.cf2.rackcdn.com/','https://742f913181b119641ae7-df496306fa8797eeaa185cf4efe46839.ssl.cf2.rackcdn.com/','https://7a5592888a7287d31c78-f6bb380e8ab4267728cd54d872eafb4a.ssl.cf2.rackcdn.com/','https://b4bf521e418a3ad6cc58-5903e31b4ba3129cc16fccd90c7e31e7.ssl.cf2.rackcdn.com/','https://4baa2db7e87b9e7d32c4-af043bdeb6a2428e08798bfa7ceaa730.ssl.cf2.rackcdn.com/','https://fc7a059c5301947fc30b-a59ab0846d982701c4e1c77147230e83.ssl.cf2.rackcdn.com/','https://4943e63257e1fdf08ca7-d5e89ad219304006eebe9c9d18e7bee4.ssl.cf2.rackcdn.com/','https://c8b4112a4026ed265e69-0e1ec122520579c383d8806557f5aaa0.ssl.cf2.rackcdn.com/','https://81b6e0ceef9000f7d78e-82ee408f0eada42189433ea0c1925883.ssl.cf2.rackcdn.com/'],
+            RefreshInt : 0,
+            units : 2,
+            coords : "DecimalDegrees",
+            data: {"Id":0,"L":47.632888,"N":-122.280385,"A":10.46,"G":0.0000,"C":0,"D":"2015-07-01T23:33:15Z","S":3,"P":true,"T":1195207,"M":33201312,"X":"Hello","ET":13,"H":0},
+            FirstName: "Jan",
+            LastName: "Miksovsky",
+            Google: true,
+            GoogleURL: "https://maps.google.com/maps/api/js?v=3&sensor=false&callback=L.Google.asyncInitialize&key=AIzaSyAkiQpA0gWsE3JU36Jmu960viXFQcOM8Kc",
+            mobile: false,
+            User : {"Id":61907,"AssignedDeviceId":null,"HasData":false,"MatchesCurrentFilter":true,"InField":false,"FirstName":"Jan","LastName":"Miksovsky","TrackingStatus":false,"Locations":[{"Id":0,"L":47.6328887939453,"N":-122.280387878418,"A":34.0,"G":0.0,"C":0,"D":"2015-07-01T23:33:15Z","S":3,"T":null,"M":33201312,"X":"Hello","ET":null,"H":0}],"ColorCode":"#4F96C6","GroupID":0,"LastSeenTime":null,"CanSendToDevice":true,"EnableLocate":false,"EnableMessage":false,"MapDisplayName":"Jan Miksovsky","UpdateRowVersion":null,"MBR":null},
+            InMapShare : true,
+        };
+    });
+</script>
+<!-- Facebook Open Graph Tags
+https://developers.facebook.com/docs/opengraph/howtos/maximizing-distribution-media-content/#tags
+<meta property="og:title" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="" />
+<meta property="og:description" content="" />-->
+<meta property="og:image" content="/Content/images/EarthaIconFacebook-200x200.jpg" />
+
+<script src="/bundles/txtReplyFull?v=Xt9yQqAQtkBZIS2-NKR-m--NCzhWfD_OVi4X1rkLYiU1"></script>
+
+</head>
+<body style="height:100%;width:100%;margin:0;">
+	<div id="header" class="grayBg">
+
+		<img src="/Content/images/Logo.png" style="float:left;" />
+
+		<div style="position:absolute;top:1px;right:1px;padding:0px;text-align:right;z-index:100;">
+			<a href="http://www.delorme.com/inreach/" target="_blank" title="Click here to learn more about the DeLorme inReach Satellite Communicator"><img src="/Content/images/inreach_textmsg_banner_01.png" /></a>
+		</div>
+		<div class="headerText">
+			Jan Miksovsky's Message and Location
+		</div>
+	</div>
+	<div id="">
+		<div id="nopoints" style="display:none;">
+			<div><strong>Location not available for this message</strong></div>
+		</div>
+		<div id="map" style="width:100%;height:100%;">
+		</div>
+		<div id="replyContainer" data-bind="visible: showReply" style="display: none">
+			<input data-val="true" data-val-number="The field MessageId must be a number." data-val-required="The MessageId field is required." id="MessageId" name="MessageId" type="hidden" value="33201312" />
+			<input data-val="true" data-val-required="The Guid field is required." id="Guid" name="Guid" type="hidden" value="fd14a106-1355-4759-9bf4-88a58b142c76" />
+			<div class="replyHeader grayBg">
+				<a href="javascript:void(0);" class="toggleReply btn" style="float:right;margin-right:-5px;margin-top:-5px;">Hide Reply</a>
+				<strong>Reply To Jan Miksovsky</strong>
+			</div>
+			<div class="replyBody">
+                    <p>
+					    <strong>Jan Miksovsky's message:</strong><br />
+					    <span style="word-wrap:break-word;">Hello</span>
+				    </p>
+				<p>
+					<strong>Your email or mobile phone:</strong><br />
+					<span style="font-size:11px;">Use full number, starting with “+” and country code. Use “+1” for US numbers</span>
+					<span data-bind="visible: sendMessageFromFormatError() != null, text: sendMessageFromFormatError" style="font-size:11px;" class="field-validation-error"></span>
+					<input type="email" id="ReplyAddress" style="width:99%;" value="jan@miksovsky.com" data-bind="value: from, valueUpdate:'keyup'" />
+				</p>
+				<p>
+					<strong>Your reply:</strong>
+					<span style="float:right;" class="countdown" data-bind="html: remainingMessage"></span>
+					<br />
+					<textarea id="ReplyMessage" style="width:99%;height:60px;" data-bind="value: message, valueUpdate:'keyup'"></textarea>
+				</p>
+				<div id="errorMsg" style="float:left;display:none;">There was an error sending your message.</div>
+				<div id="successMsg" style="float:left;color:green;display:none;">Message Sent!</div>
+				<div style="float:right;padding-bottom:10px;">
+					<a  id="sendBtn" class="btn" data-bind="css: {disabled : !formValid()}, click: sendForm">Send Message</a>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+    <div id="divPopupTemplateContainer" style="display:none;"></div>
+    <link rel="stylesheet" href="/Content/Map.css" />
+    <link rel="stylesheet" href="/scripts/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="/scripts/leaflet/leaflet.label.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/scripts/leaflet/leaflet.ie.css" />
+    <![endif]-->
+<script type="text/javascript">
+    L_PREFER_CANVAS = true;
+
+        var msgObj = {
+        	name: "Jan Miksovsky",
+            time: '7/1/2015 11:33:15 PM',
+        	text: "Hello"
+        };
+
+    $(document).ready(function () {
+        resizeMap();
+        $('.toggleReply').click(function () {
+            var btn = this;
+            $('.replyBody').slideToggle(function () {
+                $(btn).text($('.replyBody').is(':visible') ?
+                    'Hide Reply'
+                    :
+                    'Show Reply');
+            });
+        });
+
+        require(
+			['map-main-leaflet', 'map/controls/MappointView', 'TxtReplyCommon', 'map-config','knockout','leaflet', 'moment','leaflet.delorme.icons'	,'leafletLabel'],
+			function (map, popup, replyCommon, config, ko) {
+			    map.getInstance().init('map');
+
+			    var temp = new popup();
+			    var loc = [config.lat, config.lon];
+
+			    var openPopup = function () {
+			        var mpv = new popup();
+				    var userInfo = {
+					    FirstName: ko.observable(config.FirstName),
+					    LastName: ko.observable(config.LastName),
+						FullName: ko.observable(config.FirstName + ' ' + config.LastName),
+						CanSendToDevice: ko.observable(config.User.CanSendToDevice),
+						EnableLocate: function() {
+							return false;
+						},
+						EnableMessage: function() {
+							return false;
+						}
+				    };
+				    mpv.model().sourcePoint(config.data);
+			        mpv.model().user(userInfo);
+			        mpv.display(new L.LatLng(config.lat, config.lon));
+			    };
+
+			    var marker = L.DeLorme.Icons.headcrumbMarker(parseInt(config.data.C * 22.5), loc, {
+			        'fillColor': '#4F96C6',
+			        'clickHeadcrumb': openPopup,
+			        'source': config.data,
+                    'expandable': false,
+                    zIndexOffset: 1000
+			    });
+
+			    if (marker.bindLabel) {
+			        marker.bindLabel(config.FirstName + ' ' + config.LastName, {
+			            noHide: true,
+			            className: 'nameLabel'
+			        });
+			        marker.showLabel();
+			    }
+
+			    if(!config.Archived){
+			        marker.addTo(map.getInstance().pointLayer);
+			        setTimeout(openPopup, 500);
+			    }
+			    replyCommon.init('jan@miksovsky.com','');
+			});
+
+    });
+
+    $(window).resize(resizeMap);
+
+    function resizeMap(){
+        var $map = $('#map');
+        var height = $(document).height();
+        var top = $map.offset().top;
+        $map.height(height-top);
+    }
+</script>
+</body>
+</html>

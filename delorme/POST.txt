@@ -1,0 +1,25 @@
+curl 'https://explore.delorme.com/TextMessage/TxtMsg'
+ -H 'Cookie:
+__unam=cd42ded-14cbb27a985-597b4376-3;
+__utma=265985178.2104097384.1425780234.1426480600.1435032725.4;
+__utmc=265985178;
+__utmz=265985178.1425780234.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none);
+_ga=GA1.2.2104097384.1425780234;
+ServerID=1084'
+-H 'Origin: https://explore.delorme.com'
+-H 'Accept-Encoding: gzip, deflate'
+-H 'Accept-Language: en-US,en;q=0.8'
+-H 'X-Requested-With: XMLHttpRequest'
+-H 'Connection: keep-alive'
+-H 'Pragma: no-cache'
+-H 'X-NewRelic-ID: Vg8DV1FRGwIEUlRSAwk='
+-H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36'
+-H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8'
+-H 'Accept: */*'
+-H 'Cache-Control: no-cache'
+-H 'Referer: https://explore.delorme.com/textmessage/txtmsg?mo=fd14a106135547599bf488a58b142c7632505664&adr=jan%40miksovsky.com'
+-H 'DNT: 1'
+--data 'ReplyAddress=jan%40miksovsky.com
+  &ReplyMessage=This+is+a+reply+from+the+web+site.
+  &MessageId=33201312
+  &Guid=fd14a106-1355-4759-9bf4-88a58b142c76' --compressed

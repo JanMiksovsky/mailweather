@@ -1,0 +1,80 @@
+Return-Path: <no.reply@delorme.com>
+Delivered-To: janm-miksovsky:com-jan@miksovsky.com
+X-Envelope-To: jan@miksovsky.com
+Received: (qmail 71446 invoked from network); 1 Jul 2015 23:41:29 -0000
+Received: from mailwash46.pair.com (66.39.2.46)
+  by tanha.pair.com with SMTP; 1 Jul 2015 23:41:29 -0000
+Received: from localhost (localhost [127.0.0.1])
+	by mailwash46.pair.com (Postfix) with SMTP id 29F0EEBC2B
+	for <jan@miksovsky.com>; Wed,  1 Jul 2015 19:41:29 -0400 (EDT)
+X-Virus-Check-By: mailwash46.pair.com
+X-Spam-Check-By: mailwash46.pair.com
+X-Spam-Status: No, hits=-3.0 required=4.0 tests=BAYES_00,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS,SPF_PASS autolearn=ham autolearn_force=no version=3.004001
+X-Spam-Flag: NO
+X-Spam-Level:
+X-Spam-Filtered: 551085a9d1277027d51d378d4b5ffba4
+Received: from na01-bn1-obe.outbound.protection.outlook.com (mail-bn1bon0090.outbound.protection.outlook.com [157.56.111.90])
+	by mailwash46.pair.com (Postfix) with ESMTP id 7BDC0EBC20
+	for <jan@miksovsky.com>; Wed,  1 Jul 2015 19:41:28 -0400 (EDT)
+Received: from BN1AFFO11FD008.protection.gbl (10.58.52.33) by
+ BN1AFFO11HUB008.protection.gbl (10.58.52.118) with Microsoft SMTP Server
+ (TLS) id 15.1.201.10; Wed, 1 Jul 2015 23:41:27 +0000
+Authentication-Results: spf=pass (sender IP is 50.57.12.85)
+ smtp.mailfrom=delorme.com; miksovsky.com; dkim=none (message not signed)
+ header.d=none;
+Received-SPF: Pass (protection.outlook.com: domain of delorme.com designates
+ 50.57.12.85 as permitted sender) receiver=protection.outlook.com;
+ client-ip=50.57.12.85; helo=app2.delorme.com;
+Received: from app2.delorme.com (50.57.12.85) by
+ BN1AFFO11FD008.mail.protection.outlook.com (10.58.52.68) with Microsoft SMTP
+ Server id 15.1.201.10 via Frontend Transport; Wed, 1 Jul 2015 23:41:26 +0000
+Received: from 372437-APP2 ([127.0.0.1]) by app2.delorme.com with Microsoft SMTPSVC(7.5.7601.17514);
+	 Wed, 1 Jul 2015 18:41:26 -0500
+MIME-Version: 1.0
+From: "DeLorme inReach" <no.reply@delorme.com>
+To: jan@miksovsky.com
+Date: 1 Jul 2015 18:41:26 -0500
+Subject: inReach message from Jan Miksovsky
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Message-ID: <372437-APP2OfIQTV2w00009fd6@app2.delorme.com>
+X-OriginalArrivalTime: 01 Jul 2015 23:41:26.0324 (UTC) FILETIME=[721A8740:01D0B457]
+X-EOPAttributedMessage: 0
+X-Microsoft-Exchange-Diagnostics: 1;BN1AFFO11FD008;1:WJUnUr1/xzU8eIK7ScynAX6X96/I5QNHF6IvWkb3QVP5eL2K2vQsZ05Avw6wnHhziYKX7yEO9jqrG04VvjWhZTRGaYE4E6/Wi+eCSbzuhUTgbwjeoq2rGe1MDGWTSN6cnVS99TkLiT56BNQIb5Yw/4qhmX2V8izWJCQibT6XbDl7IewyeECWMYItefQvr+799rIdcjX+rirplFwaxvKjTDC3lF+jB88eoY0qekovFoMrlT6bjCnBk4ybgt8+m8QkBGOPM9XH4IIefNhVFovJTg==
+X-Forefront-Antispam-Report:
+	CIP:50.57.12.85;CTRY:US;IPV:NLI;EFV:NLI;SFV:NSPM;SFS:(10009020)(6009001)(2980300002)(438002)(199003)(189002)(46102003)(189998001)(5001970100001)(54356999)(110136002)(47776003)(450100001)(77156002)(62966003)(2420400003)(15975445007)(107886002)(50986999)(23726002)(77096005)(106466001)(89072001)(2351001)(229853001)(104016003)(50466002)(87936001)(2361001)(19580395003)(92566002)(86362001);DIR:OUT;SFP:1101;SCL:1;SRVR:BN1AFFO11HUB008;H:app2.delorme.com;FPR:;SPF:Pass;MLV:sfv;A:1;MX:1;LANG:en;
+X-Microsoft-Exchange-Diagnostics:
+	1;BN1AFFO11HUB008;2:xYr+rbsCo3AIV9MpPpr+e23T+WPZY5ECykrz8/biIf85EbpnADcJVdFHdpWax/YD;3:h+m7fhKrNBCLBnAMKK/5J2XIqQn1ftRL9znJW3ihu8UrLFm1rlkFNSp4g3maIbQcbZN1BT/QyIHXduDfZ/vFt3dME3kYvQoHk6iNW62BH45HoooRl+CkDc3/Ti3aJTt7T7hmVzvO2RuSQYmngFV4Mf6pmSPBYfAWSMsebzwuDGD+HFO10cc1vxiuivIrOMrcR+hkbe9mwmtu7UL/ijIUkSVL8/Qs7sbjGjJ7Cy80Ai0=;20:03Wl255Cb1S2jD+m55t1JGkapZodhOkXNKYH8Hcw1ewR5/83sv+w6V8pyGlMjINO3qwHtPEhYjC45rWoH1WOjZgtGqTttkRPPFwbw6Apg5c14drVy4TdeDa6q7pcFI50FYX/5DtqE4xJ+3yWmMuTO+MCT/OmQmbqeHMTcWxNhUu2cnaqKdE74z0H54A73bXE0xZGbO3q/YG6/hRZHm8HKIvwf+rcdf5RQ/4buOR2nE23eNOkJ0Y+J+mFqdWPP1yJJWspx98si7RMtUoZpMqwimbOxRwxSKTfDhP5jW6Z3jP3tVplvsXQkSny9PQsBpbr5kuTYy81NVBl9pupIOOAVnT97oWxxTbA4R/KBZbeI7Kuf4cPMlxaZ7IO73WkDaitfOTXsC8WsO3sS++e6o206LJoKuWqjy7V14mRJcCuuxSAcUurw1qbK4HNs/SYWdiTw+dLs50fG8DboVF5U278Br5QZx9HAprfdRKtS1gPoEYPs3ttIl9FoBeFr8Cy4R87
+X-Microsoft-Antispam: UriScan:;BCL:0;PCL:0;RULEID:;SRVR:BN1AFFO11HUB008;
+X-Microsoft-Antispam-PRVS:
+	<BN1AFFO11HUB0088FD56DDF3FC8C03168C190A80@BN1AFFO11HUB008.protection.gbl>
+X-Exchange-Antispam-Report-Test: UriScan:;
+X-Exchange-Antispam-Report-CFA-Test:
+	BCL:0;PCL:0;RULEID:(601004)(5005006)(3002001);SRVR:BN1AFFO11HUB008;BCL:0;PCL:0;RULEID:;SRVR:BN1AFFO11HUB008;
+X-Microsoft-Exchange-Diagnostics:
+	1;BN1AFFO11HUB008;4:+IpUqGJqRGl3lAiopL5JZ4mM0BmJp2V801v+PvAENrNlQqmbJzzJ6A2EGFsSdP+K6Rk7uKf8TYNS8DzZ016rPFzsO9N7Q9d9XSGKkeIQ49uGRXKx6ACIaHH/EpbA88lKQIc0cktLI3fN0xyFF2St+Mx90J5+GUnsPDxngVA6eAOCT+cEmw1LSIfUdHYW0F/iymS1fs5jwyDszhKt7IVeuqeZzR6zk6nPYeZCpeyhopmMACE1ddkYUhlzcbxmQLPcnFyW0k0cD6C1hXIFYDBMcDC0gUZhFHl+hrk9QiVvOu0=
+X-Forefront-PRVS: 0624A2429E
+X-Microsoft-Exchange-Diagnostics:
+	1;BN1AFFO11HUB008;23:qNNIKJ15uhNGuOTuYcSmwyak5kEm9CZLvHofEriCS4N/gn5ZgUvxx3FM16MbDLZLrV7GGg50bTv/oKaRZtHTsDNxO+ubJp1M2nmJd5heY1XbLrKhdIwlHvZmjh2e9X2r4gKrSjXNZgZe5KbGlbUGb5YQ9tMKsTpFcAGa85l/Q/taLbq1I0B7RQx/hB5dCAzPrYtLwipyDEvO6pxTvG/5EfW+CL1ZkcB+hWqTNOUGdjeIIKOEofGiGsH7d0FxuQ32PQhLBx4Cnp5yFK91S8gSzGQIhFGek3ASOUohAj9f1Xfmuf6NuWJY7cdG6rRQZBrcdr9UVEN8yzW44yx+7WpXf4insUJzi2iVT56zwiG00hvOkJLEcOiA/2y42cEtapf9VVNjfHRy7kdndoC2p4itinkKwHKkell+G/i8OSftgiTEhFNEyFxjTOgOq9zy877BjsTS1rckCiweIqDi5FxxSDRv/xTR4NlGW/gVkEDKuxZ+mvCDupchNAH85+vbxNWf+8ZxE5/Cs9mI/KDgD4wNwRbmZbgFqpx3cAvqA8E5LEsZM6Alxhbl/GnaId7OO36U2NOvIwIyfWEo60VhOoyyXRfDt2hzqgLBofT+Cn1KceYU7KORivs9TfXc2BUwUbBlgx3UQEx2YZnbRlUVACQfjTiC7dlqAQeSgZAzLP2aWUn4kmfZWBCqGUTBXk40DSzV9/+spSvJefIipUMH2L1qbU4MKYwDKvHftwKVRHp8/Jz8Dr9lbWZx9qrP4rz+K9ycMGZoJMQnYcg2We43zILX+P7nKNxAXZfnrMEJGmveHxramuyNfNdGCKSQndeQXKBr3QbF0VIYCJaWCQb+FzLXKg==
+X-Microsoft-Exchange-Diagnostics:
+	1;BN1AFFO11HUB008;5:3kn3alu4KNL28koxnly7NTq/LifllehIGPbO6TZJxtJl9xAJwIoYD98zYXXx5qjX7ys0AQkpn5J2g3TFeQK78jQv34wU/Bp4mORTHMEfhole8sXbtmuF3SuMhF3OJtjGDNJgmvIbWOcZJrNHn2NuAw==;24:ZItmVyILfTWS/PGcTC3UQPcUaan4Rec1C2gj3MhYt98XPXBywiW4j29HoThfw/MYAtn6sFcX18bEmg98Yg7cKIeSJYM93h42urH/DwlF6Is=
+X-OriginatorOrg: delorme.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Jul 2015 23:41:26.8886
+ (UTC)
+X-MS-Exchange-CrossTenant-Id: 7bb93307-cf74-4774-9d26-c65a54da53e1
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=7bb93307-cf74-4774-9d26-c65a54da53e1;Ip=[50.57.12.85];Helo=[app2.delorme.com]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN1AFFO11HUB008
+
+Hello
+
+View the location or send a reply to Jan Miksovsky:
+https://explore.delorme.com/textmessage/txtmsg?mo=fd14a106135547599bf488a58b142c7632505664&adr=3Djan%40miksovsky.com
+
+
+Jan Miksovsky sent this message from:
+Lat 47.632888 Lon -122.280385
+
+Do not reply directly to this message.
+
+This message was sent to you using the DeLorme inReach two-way satellite communicator with GPS. To learn more, visit http://www.delorme.com/inReach/=20
