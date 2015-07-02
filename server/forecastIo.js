@@ -40,8 +40,8 @@ let ABBREVIATIONS = {
   "clear-day": "clear",
   "clear-night": "clear",
   "falling": "fall",
-  "partly-cloudy-day": "partly cloudy",
-  "partly-cloudy-night": "partly cloudy",
+  "partly-cloudy-day": "part cloudy",
+  "partly-cloudy-night": "part cloudy",
   "precipitation": "precip",
   "rising": "rise",
   "temperatures": "temps",
@@ -62,23 +62,16 @@ function abbreviate(text) {
   return result;
 }
 
-function addHourDataToCalendar(hourData, calendar) {
-  let date = getDateFromHourData(hourData);
-  let day = getDayFromDate(date);
-  let time = day.getTime();
-  let calendarDay = calendar.get(time);
-  if (!calendarDay) {
-    calendarDay = {
-      day: day,
-      hours: []
-    };
-    calendar.set(time, calendarDay);
-  }
-  addHourDataToCalendarDay(hourData, calendarDay);
+function addDailyDataToCalendar(dailyData, calendar) {
+  let date = getDateFromForecastTime(dailyData.time);
+  let calendarDay = getCalendarDayForDate(calendar, date);
+  calendarDay.temperatureMaxHour = getDateFromForecastTime(dailyData.temperatureMaxTime).getHours();
+  calendarDay.temperatureMinHour = getDateFromForecastTime(dailyData.temperatureMinTime).getHours();
 }
 
-function addHourDataToCalendarDay(hourData, calendarDay) {
-  let date = getDateFromHourData(hourData);
+function addHourDataToCalendar(hourData, calendar) {
+  let date = getDateFromForecastTime(hourData.time);
+  let calendarDay = getCalendarDayForDate(calendar, date);
   let hour = date.getHours();
   calendarDay.hours[hour] = {
     icon: hourData.icon,
@@ -115,7 +108,9 @@ function format(forecast) {
   forecast.hourly.data.forEach(function(hourData) {
     addHourDataToCalendar(hourData, calendar);
   });
-  // addHourDataToCalendar(forecast.hourly.data[0], calendar);
+  forecast.daily.data.forEach(function(dayData) {
+    addDailyDataToCalendar(dayData, calendar);
+  });
   let formattedSummary = abbreviate(forecast.daily.summary);
   let text = `${formattedSummary}\n`;
   text += formatCalendar(calendar);
@@ -142,6 +137,8 @@ function formatCalendarDay(calendarDay) {
   let previousIcon = null;
   calendarDay.hours.forEach(function(data, hour) {
     let includeHour = (hour % 3 ===0) && (hour >= 6) && (hour <= 21);
+    includeHour = includeHour || hour === calendarDay.temperatureMaxHour;
+    includeHour = includeHour || hour === calendarDay.temperatureMinHour;
     let temperature = data.temperature;
     if (temperature && includeHour) {
       let icon = (data.icon === previousIcon) ? null : data.icon;
@@ -176,8 +173,22 @@ function formatIcon(icon) {
   return formattedIcon;
 }
 
-function getDateFromHourData(hourData) {
-  return new Date(hourData.time * 1000);
+function getCalendarDayForDate(calendar, date) {
+  let day = getDayFromDate(date);
+  let time = day.getTime();
+  let calendarDay = calendar.get(time);
+  if (!calendarDay) {
+    calendarDay = {
+      day: day,
+      hours: []
+    };
+    calendar.set(time, calendarDay);
+  }
+  return calendarDay;
+}
+
+function getDateFromForecastTime(time) {
+  return new Date(time * 1000);
 }
 
 // Return midnight on the given date.
