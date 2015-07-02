@@ -26,6 +26,8 @@ let DAYS_OF_WEEK = [
 ];
 
 let ABBREVIATIONS = {
+  ".": "",
+  "°F": "°",
   " at ": " ",
   " on ": " ",
   " the ": " ",
@@ -42,6 +44,7 @@ let ABBREVIATIONS = {
   "falling": "fall",
   "partly-cloudy-day": "part cloudy",
   "partly-cloudy-night": "part cloudy",
+  "peaking": "peak",
   "precipitation": "precip",
   "rising": "rise",
   "temperatures": "temps",
@@ -141,9 +144,13 @@ function formatCalendarDay(calendarDay) {
     includeHour = includeHour || hour === calendarDay.temperatureMinHour;
     let temperature = data.temperature;
     if (temperature && includeHour) {
-      let icon = (data.icon === previousIcon) ? null : data.icon;
-      formattedHours.push(formatHour(hour, temperature, icon));
-      previousIcon = data.icon;
+      let icon = formatIcon(data.icon);
+      // Suppress duplicate icon.
+      let formattedIcon = (icon !== previousIcon) ?
+        icon :
+        '';
+      formattedHours.push(formatHour(hour, temperature, formattedIcon));
+      previousIcon = icon;
     }
   });
   result += formattedHours.join('\n');
@@ -162,15 +169,14 @@ function formatHour(hour, temperature, icon) {
   // do something more complex, sometimes (but not always?) rounding down for
   // fractions above .5. So our forecasts won't agree precisely.
   let formattedTemperature = Math.round(temperature);
-  let formattedIcon = formatIcon(icon);
+  let formattedIcon = icon || '';
   return `${formattedHour}${meridiem} ${formattedTemperature}°${formattedIcon}`;
 }
 
 function formatIcon(icon) {
-  let formattedIcon = icon ?
+  return icon ?
     abbreviate(icon) :
     '';
-  return formattedIcon;
 }
 
 function getCalendarDayForDate(calendar, date) {
