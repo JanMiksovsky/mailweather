@@ -6,6 +6,8 @@
 
 let request = require('request-promise');
 
+let MAX_MESSAGE_LENGTH = 160;
+
 let DAYS_OF_WEEK = [
   'Sun',
   'Mon',
@@ -84,6 +86,29 @@ function addHourDataToCalendarDay(hourData, calendarDay) {
   };
 }
 
+// Clip the full text to fit in a 160 character text message, breaking at the
+// last full line that fits.
+function fitInTextMessage(full) {
+  let lines = full.split('\n');
+  let result = '';
+  for (let line of lines) {
+    let added = result;
+    if (added.length > 0) {
+      added = added + '\n';
+    }
+    added = added + line;
+    // console.log(`[${added.length}, ${line.length}]${line}`);
+    if (added.length > MAX_MESSAGE_LENGTH) {
+      // Not enough room for everything.
+      break;
+    }
+    result = added;
+  }
+  // console.log(`[${result.length}]`);
+  // Entire message fit.
+  return result;
+}
+
 // Format a Forecast.io forecast for human presentation.
 function format(forecast) {
   let calendar = new Map();
@@ -92,8 +117,9 @@ function format(forecast) {
   });
   // addHourDataToCalendar(forecast.hourly.data[0], calendar);
   let formattedSummary = abbreviate(forecast.daily.summary);
-  let result = `${formattedSummary}\n`;
-  result += formatCalendar(calendar);
+  let text = `${formattedSummary}\n`;
+  text += formatCalendar(calendar);
+  let result = fitInTextMessage(text);
   return result;
 }
 
