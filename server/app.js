@@ -7,9 +7,11 @@ let forecastIo = require('./forecastIo');
 let nodemailer = require('nodemailer');
 let path = require('path');
 let fs = require('fs');
+let querystring = require('querystring');
 
 let PORT = process.env.PORT || 8000;
 let REPLY_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
+let DEFAULT_RECIPIENT = 'jan@miksovsky.com';
 
 let transport = nodemailer.createTransport({
   host: 'mail529.pair.com',
@@ -47,11 +49,11 @@ app.post('/message', function(request, response) {
     let subject = outgoing.subject;
     let message = {
         from: REPLY_FROM,
-        to: incoming.from,
+        to: outgoing.to,
         // subject: subject,
         text: body
     };
-    // sendMessage(message);
+    sendMessage(message);
     return loadFile('/');
   })
   .then(function(html) {
@@ -76,6 +78,7 @@ function constructReply(incoming) {
   if (!location) {
     // No location found
     Promise.resolve({
+      to: incoming.from,
       subject: "Weather: no location found",
       body: "No location could be found in the original message below."
     });
@@ -85,6 +88,7 @@ function constructReply(incoming) {
   .then(function(forecast) {
     let outgoingBody = `${forecast}\n\n${location.latitude},${location.longitude}`;
     return {
+      to: incoming.from,
       subject: `Weather for ${location.latitude},${location.longitude}`,
       body: outgoingBody
     };
@@ -113,12 +117,28 @@ function loadFile(relativePath) {
   });
 }
 
+function parseDeLormeSender(body) {
+  let senderRegex = /&adr=([^\s&]+)/;
+  let match = body.match(senderRegex);
+  return match ?
+    querystring.unescape(match[1]) :
+    null;
+}
+
 function parseMessageRequest(request) {
-  let messageFrom = request.envelope ?
-    request.envelope.from :
-    'jan@miksovsky.com';
-  console.log(`Received message from :\n${messageFrom}`);
+
   let messageBody = request.body.html || request.body.plain;
+
+  let messageFrom = (request.envelope && request.envelope.from) || request.body.from;
+  if (messageFrom && messageFrom.endsWith('delorme.com')) {
+    // For messages from DeLorme, parse sender from message body.
+    messageFrom = parseDeLormeSender(messageBody);
+  }
+
+  console.log(`Received message from :\n${messageFrom}`);
+
+  // Send to default recipient if no recipient was found
+  messageFrom = messageFrom || DEFAULT_RECIPIENT;
   return {
     from: messageFrom,
     body: messageBody

@@ -16,6 +16,10 @@
     padding: 1em;
   }
 
+  #from {
+    width: 300px;
+  }
+
   textarea {
     height: 100px;
     width: 400px;
@@ -32,6 +36,9 @@
   <h1>MailWeather</h1>
   <p>
     <form action="/message" method="POST">
+      <p>
+        From: <input id="from" type="text" name="from" value="noreply@delorme.com">
+      </p>
       <textarea type="text" name="plain">
 47.6329,-122.2800
       </textarea>
