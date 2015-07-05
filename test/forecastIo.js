@@ -9,11 +9,14 @@ let forecastIo = require('../server/forecastIo');
 describe('ForecastIO', function() {
 
   it("formats forecast from sample data", function(done) {
+    let actual;
     sample.getForecast()
     .then(function(forecast) {
-      let formatted = forecastIo.format(forecast);
-      console.log(formatted);
-      assert.equal(formatted, 'Clear');
+      actual = forecastIo.format(forecast);
+      return sample.getFile('forecast.txt');
+    })
+    .then(function(expected) {
+      assert.equal(actual, expected);
       done();
     })
     .catch(function(err) {

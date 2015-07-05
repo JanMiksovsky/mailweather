@@ -5,25 +5,29 @@ let path = require('path');
 let assert = require('chai').assert;
 let forecastIo = require('../server/forecastIo');
 
-function getForecast() {
-
-  let filePath = path.join(__dirname, 'forecast.json');
-  // console.log(filePath);
+// Return a promise for the contents of the given file.
+function getFile(relativePath) {  
+  let filePath = path.join(__dirname, relativePath);
   return new Promise(function(resolve, reject) {
-
     fs.readFile(filePath, { encoding: 'utf8' }, function(err, data) {
       if (err) {
         reject(err);
       } else {
-        let json = JSON.parse(data);
-        resolve(json);
+        resolve(data);
       }
     });
+  });
+}
 
+function getForecast() {
+  return getFile('forecast.json')
+  .then(function(data) {
+    return JSON.parse(data);
   });
 }
 
 module.exports = {
+  getFile: getFile,
   getForecast: getForecast
 };
 
