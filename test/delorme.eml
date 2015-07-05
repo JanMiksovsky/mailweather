@@ -1,64 +1,3 @@
-Return-Path: <no.reply@delorme.com>
-Delivered-To: janm-miksovsky:com-jan@miksovsky.com
-X-Envelope-To: jan@miksovsky.com
-Received: (qmail 79363 invoked from network); 23 Jan 2015 17:38:01 -0000
-Received: from mailwash46.pair.com (66.39.2.46)
-  by tanha.pair.com with SMTP; 23 Jan 2015 17:38:01 -0000
-Received: from localhost (localhost [127.0.0.1])
-	by mailwash46.pair.com (Postfix) with SMTP id 5FD50EBF8B
-	for <jan@miksovsky.com>; Fri, 23 Jan 2015 12:38:01 -0500 (EST)
-X-Virus-Check-By: mailwash46.pair.com
-X-Spam-Check-By: mailwash46.pair.com
-X-Spam-Status: No, hits=-1.9 required=4.0 tests=BAYES_00,RCVD_IN_MSPIKE_H2,SPF_HELO_PASS autolearn=ham autolearn_force=no version=3.004000
-X-Spam-Flag: NO
-X-Spam-Level: 
-X-Spam-Filtered: 551085a9d1277027d51d378d4b5ffba4
-Received: from na01-by2-obe.outbound.protection.outlook.com (mail-by2on0080.outbound.protection.outlook.com [207.46.100.80])
-	by mailwash46.pair.com (Postfix) with ESMTP id 9E689EBC17
-	for <jan@miksovsky.com>; Fri, 23 Jan 2015 12:38:00 -0500 (EST)
-Received: from BY2FFO11FD013.protection.gbl (10.1.14.31) by
- BY2FFO11HUB013.protection.gbl (10.1.14.167) with Microsoft SMTP Server (TLS)
- id 15.1.75.11; Fri, 23 Jan 2015 17:37:58 +0000
-Received: from app2.delorme.com (50.57.12.85) by
- BY2FFO11FD013.mail.protection.outlook.com (10.1.14.75) with Microsoft SMTP
- Server id 15.1.75.11 via Frontend Transport; Fri, 23 Jan 2015 17:37:57 +0000
-Received: from 372437-APP2 ([127.0.0.1]) by app2.delorme.com with Microsoft SMTPSVC(7.5.7601.17514);
-	 Fri, 23 Jan 2015 11:37:56 -0600
-MIME-Version: 1.0
-From: DeLorme inReach <no.reply@delorme.com>
-To: <jan@miksovsky.com>
-Date: Fri, 23 Jan 2015 11:37:56 -0600
-Subject: inReach message from Jan Miksovsky
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-Message-ID: <372437-APP2hMOPiLMU000094ab@app2.delorme.com>
-X-OriginalArrivalTime: 23 Jan 2015 17:37:56.0211 (UTC) FILETIME=[52952430:01D03733]
-X-EOPAttributedMessage: 0
-Received-SPF: Pass (protection.outlook.com: domain of delorme.com designates
- 50.57.12.85 as permitted sender) receiver=protection.outlook.com;
- client-ip=50.57.12.85; helo=app2.delorme.com;
-Authentication-Results: spf=pass (sender IP is 50.57.12.85)
- smtp.mailfrom=no.reply@delorme.com; miksovsky.com; dkim=none (message not
- signed) header.d=none;
-X-Forefront-Antispam-Report:
-	CIP:50.57.12.85;CTRY:US;IPV:NLI;EFV:NLI;SFV:NSPM;SFS:(10009020)(6009001)(229853001)(50986999)(107886001)(50466002)(575784001)(92566002)(54356999)(23726002)(86362001)(87936001)(97756001)(19580395003)(77096005)(15975445007)(104016003)(2361001)(47776003)(450100001)(110136001)(62966003)(2420400003)(46102003)(106466001)(89072001)(77156002)(2351001)(46406003);DIR:OUT;SFP:1101;SCL:1;SRVR:BY2FFO11HUB013;H:app2.delorme.com;FPR:;SPF:None;MLV:sfv;LANG:en;
-X-Microsoft-Antispam: UriScan:;
-X-Microsoft-Antispam: BCL:0;PCL:0;RULEID:;SRVR:BY2FFO11HUB013;
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test:
-	BCL:0;PCL:0;RULEID:(601004);SRVR:BY2FFO11HUB013;
-X-Forefront-PRVS: 0465429B7F
-X-Exchange-Antispam-Report-CFA-Test: BCL:0;PCL:0;RULEID:;SRVR:BY2FFO11HUB013;
-X-OriginatorOrg: delorme.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jan 2015 17:37:57.0880
- (UTC)
-X-MS-Exchange-CrossTenant-Id: 7bb93307-cf74-4774-9d26-c65a54da53e1
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=7bb93307-cf74-4774-9d26-c65a54da53e1;Ip=[50.57.12.85]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY2FFO11HUB013
-
-Email test 
-
 View the location or send a reply to Jan Miksovsky:
 https://explore.delorme.com/textmessage/txtmsg?mo=6cf76ee244ec40a0ab0170c05040102322740101&adr=jan%40miksovsky.com      
 
@@ -68,4 +7,4 @@ Lat 47.633082 Lon -122.280192
 Do not reply directly to this message.
 
 This message was sent to you using the DeLorme inReach two-way satellite
-communicator with GPS. To learn more, visit http://www.delorme.com/inReach/=20
+communicator with GPS. To learn more, visit http://www.delorme.com/inReach/

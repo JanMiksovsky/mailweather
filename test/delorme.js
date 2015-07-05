@@ -21,7 +21,16 @@ describe('DeLorme handler', function() {
   });
   
   it('extracts ID and GUID from DeLorme web page', function(done) {
-    
+    sample.getFile('delorme.html')
+    .then(function(html) {
+      let info = delorme.extractInfoFromWebPage(html);
+      assert.equal(info.guid, '798be1f2-bca7-4655-b0d7-a4baeafd2fc4');
+      assert.equal(info.messageId, '32598084');
+      done();
+    })
+    .catch(function(err) {
+      done(err);
+    });
   });
 
 });
