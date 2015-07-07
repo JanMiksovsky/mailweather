@@ -5,7 +5,7 @@ var Greet = React.createClass({
   render: function() {
     return (
       React.createElement('div', { className: 'test' },
-        "Hello, world?"
+        "Hello, " + this.props.message + "."
       )
     );
   }
@@ -13,8 +13,10 @@ var Greet = React.createClass({
 });
 
 window.addEventListener('load', function() {
-  React.render(
-    React.createElement(Greet, null),
+  window.greet = React.render(
+    React.createElement(Greet, {
+      message: 'world'
+    }),
     document.querySelector('#greet')
   );
 });
