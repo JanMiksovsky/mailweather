@@ -53,16 +53,54 @@ var WeatherApp = React.createClass({
 
   displayName: 'WeatherApp',
 
+  getInitialState: function() {
+    return {
+      forecast: ''
+    };
+  },
+
   render: function() {
-    return React.createElement(MessageForm, {
-      from: 'jan@miksovsky.com',
-      body: '47.6329,-122.2800',
-      onSubmit: this.submitMessage
-    });
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(MessageForm, {
+        from: '',
+        body: '47.6329,-122.2800',
+        onSubmit: this.submitMessage
+      }),
+      React.createElement('pre',
+        null,
+        this.state.forecast
+      )
+    );
   },
 
   submitMessage: function(message) {
-    console.log(JSON.stringify(message, null, 2));
+    console.log("Submitting...");
+    var xhr = new XMLHttpRequest();
+    var url = '/message';
+    // var body = message.body;
+    // var params = 'body=' + encodeURIComponent(body).replace('%20', '+');
+    var data = {
+      from: message.from,
+      plain: message.body
+    };
+    var text = JSON.stringify(data);
+    xhr.open('POST', url, true);
+    // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        console.log("status = " + xhr.status);
+        if (xhr.status === 200) {
+          this.setState({
+            forecast: xhr.responseText
+          });
+        }
+      }
+    }.bind(this);
+    // xhr.send(params);
+    xhr.send(text);
   }
 
 });

@@ -46,22 +46,27 @@ app.post('/message', function(request, response) {
   constructReply(incoming)
   .then(function(outgoing) {
     body = outgoing.body;
-    let subject = outgoing.subject;
-    let message = {
-        from: REPLY_FROM,
-        to: outgoing.to,
-        // subject: subject,
-        text: body
-    };
-    sendMessage(message);
-    return loadFile('/');
-  })
-  .then(function(html) {
-    // Splice in forecast.
-    let placeholder = '<!-- Forecast goes here -->';
-    html = html.replace(placeholder, body);
-    response.set('Content-Type', 'text/html');
-    response.send(html);
+    if (outgoing.to) {
+      // Send email reply.
+      let subject = outgoing.subject;
+      let message = {
+          from: REPLY_FROM,
+          to: outgoing.to,
+          // subject: subject,
+          text: body
+      };
+      // sendMessage(message);
+    }
+  //   return loadFile('/');
+  // })
+  // .then(function(html) {
+  //   // Splice in forecast.
+  //   let placeholder = '<!-- Forecast goes here -->';
+  //   html = html.replace(placeholder, body);
+  //   response.set('Content-Type', 'text/html');
+  //   response.send(html);
+    response.set('Content-Type', 'application/json');
+    response.send(body);
   });
 });
 
