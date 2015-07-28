@@ -1,16 +1,16 @@
 Drizzle today, temps peak 90° Thu
+Mon
+ 9p 79°clear
+
 Tue
- 6a 65°part cloudy
- 9a 62°
-12p 69°
- 3p 76°
- 6p 85°clear
- 7p 87°
- 9p 84°
+ 6a 62°part cloudy
+ 9a 69°
+12p 76°
+ 3p 85°clear
+ 4p 87°
+ 6p 84°
+ 9p 75°
 
 Wed
- 6a 63°clear
- 8a 61°
- 9a 62°
-12p 69°
- 3p 78°
+ 5a 61°clear
+ 6a 62°
