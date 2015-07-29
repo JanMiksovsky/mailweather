@@ -20,6 +20,15 @@ function extractUrlFromEmail(email) {
   return match && match[0];
 }
 
+function extractInfoFromEmail(email) {
+  var url = extractUrlFromEmail(email);
+  if (url) {
+
+  } else {
+    return null;
+  }
+}
+
 module.exports = {
   extractInfoFromWebPage: extractInfoFromWebPage,
   extractUrlFromEmail: extractUrlFromEmail
