@@ -2,13 +2,12 @@
 
 let fs = require('fs');
 let path = require('path');
-let assert = require('chai').assert;
 let forecastIo = require('../server/forecastIo');
 
 // Return a promise for the contents of the given file.
 function getFile(relativePath) {
   let filePath = path.join(__dirname, relativePath);
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     fs.readFile(filePath, { encoding: 'utf8' }, function(err, data) {
       if (err) {
         reject(err);

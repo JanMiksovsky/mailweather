@@ -199,7 +199,7 @@ function getDateFromForecastTime(time) {
 
 // Return midnight on the given date.
 function getDayFromDate(date) {
-  var day = new Date(date.getTime());
+  let day = new Date(date.getTime());
   day.setHours(0);
   day.setMinutes(0);
   day.setSeconds(0);

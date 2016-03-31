@@ -21,7 +21,7 @@ function extractUrlFromEmail(email) {
 }
 
 function extractInfoFromEmail(email) {
-  var url = extractUrlFromEmail(email);
+  let url = extractUrlFromEmail(email);
   if (url) {
 
   } else {

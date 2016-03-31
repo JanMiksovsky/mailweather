@@ -1,4 +1,4 @@
-var MessageForm = React.createClass({
+let MessageForm = React.createClass({
 
   displayName: 'MessageForm',
 
@@ -39,7 +39,7 @@ var MessageForm = React.createClass({
 
   submit: function(event) {
     event.preventDefault();
-    var message = {
+    let message = {
       from: this.refs.from.getDOMNode().value,
       body: this.refs.body.getDOMNode().value
     };
@@ -49,7 +49,7 @@ var MessageForm = React.createClass({
 });
 
 
-var WeatherApp = React.createClass({
+let WeatherApp = React.createClass({
 
   displayName: 'WeatherApp',
 
@@ -77,15 +77,15 @@ var WeatherApp = React.createClass({
 
   submitMessage: function(message) {
     console.log("Submitting...");
-    var xhr = new XMLHttpRequest();
-    var url = '/message';
-    // var body = message.body;
-    // var params = 'body=' + encodeURIComponent(body).replace('%20', '+');
-    var data = {
+    let xhr = new XMLHttpRequest();
+    let url = '/message';
+    // let body = message.body;
+    // let params = 'body=' + encodeURIComponent(body).replace('%20', '+');
+    let data = {
       from: message.from,
       plain: message.body
     };
-    var text = JSON.stringify(data);
+    let text = JSON.stringify(data);
     xhr.open('POST', url, true);
     // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.setRequestHeader('Content-type', 'application/json');

@@ -1,7 +1,5 @@
 'use strict';
 
-let fs = require('fs');
-let path = require('path');
 let assert = require('chai').assert;
 let sample = require('./sample');
 let delorme = require('../server/delorme');

@@ -1,4 +1,18 @@
 {
+  "browser": true,
+  "curly": true,
+  "eqnull": true,
   "esnext": true,
-  "node": true
+  "globals": {
+    "afterEach": false,
+    "before": false,
+    "console": false,
+    "describe": false,
+    "React": false,
+    "it": false
+  },
+  "node": true,
+  "undef": true,
+  "unused": "vars",
+  "varstmt": true
 }

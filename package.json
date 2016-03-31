@@ -18,6 +18,7 @@
     "npm": "^3.7.3"
   },
   "scripts": {
+    "lint": "jshint client/*.js server/*.js test/*.js",
     "test": "node_modules/mocha/bin/mocha"
   }
 }
