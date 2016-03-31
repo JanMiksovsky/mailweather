@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /*
  * Return a promise for a weather forecast for the given location.

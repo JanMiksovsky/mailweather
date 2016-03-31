@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let express = require('express');
 let bodyParser = require('body-parser');
@@ -29,22 +29,22 @@ let app = express();
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-app.get('/', function(request, response) {
+app.get('/', (request, response) => {
   loadFile(request.path)
-    .then(function(html) {
+    .then(html => {
       response.set('Content-Type', 'text/html');
       response.send(html);
     })
-    .catch(function(err) {
+    .catch(err => {
       console.error(err);
     });
 });
 
-app.post('/message', function(request, response) {
+app.post('/message', (request, response) => {
   let incoming = parseMessageRequest(request);
   let body;
   constructReply(incoming)
-  .then(function(outgoing) {
+  .then(outgoing => {
     body = outgoing.body;
     if (outgoing.to) {
       // Send email reply.
@@ -59,7 +59,7 @@ app.post('/message', function(request, response) {
     }
   //   return loadFile('/');
   // })
-  // .then(function(html) {
+  // .then(html => {
   //   // Splice in forecast.
   //   let placeholder = '<!-- Forecast goes here -->';
   //   html = html.replace(placeholder, body);
@@ -90,7 +90,7 @@ function constructReply(incoming) {
   }
 
   return forecastIo.getForecast(location)
-  .then(function(forecast) {
+  .then(forecast => {
     let outgoingBody = `${forecast}\n\n${location.latitude},${location.longitude}`;
     return {
       to: incoming.from,

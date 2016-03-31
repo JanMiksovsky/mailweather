@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function parseLocation(text) {
   let locationRegex = /(-?\d+.\d+)(?:,| Lon )(-?\d+.\d+)/;

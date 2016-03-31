@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let fs = require('fs');
 let path = require('path');
@@ -7,27 +7,27 @@ let nock = require('nock');
 let sample = require('./sample');
 let forecastIo = require('../server/forecastIo');
 
-describe('ForecastIO', function() {
+describe('ForecastIO', () => {
 
-  it("formats forecast from sample data", function(done) {
+  it("formats forecast from sample data", done => {
     let actual;
     sample.getForecast()
-    .then(function(forecast) {
+    .then(forecast => {
       actual = forecastIo.format(forecast);
       return sample.getFile('forecast.txt');
     })
-    .then(function(expected) {
+    .then(expected => {
       assert.equal(actual, expected);
       done();
     })
-    .catch(function(err) {
+    .catch(err => {
       done(err);
     });
   });
 
-  it("calls forecast.io result", function(done) {
+  it("calls forecast.io result", done => {
     sample.getForecast()
-    .then(function(data) {
+    .then(data => {
       var scope = nock('https://api.forecast.io')
           // Ignore API key for test purposes
           .filteringPath(/\/forecast\/[a-z0-9]+/, '/forecast/KEY')
@@ -39,11 +39,11 @@ describe('ForecastIO', function() {
       };
       return forecastIo.getForecast(location);
     })
-    .then(function(forecast) {
+    .then(forecast => {
       assert.isNotNull(forecast)
       done();
     })
-    .catch(function(err) {
+    .catch(err => {
       done(err);
     });
   });
