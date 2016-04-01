@@ -31,13 +31,13 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 app.get('/', (request, response) => {
   loadFile(request.path)
-    .then(html => {
-      response.set('Content-Type', 'text/html');
-      response.send(html);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  .then(html => {
+    response.set('Content-Type', 'text/html');
+    response.send(html);
+  })
+  .catch(err => {
+    console.error(err);
+  });
 });
 
 app.post('/message', (request, response) => {
@@ -74,6 +74,7 @@ let clientPath = path.join(__dirname, '../client');
 app.use(express.static(clientPath));
 app.listen(PORT);
 console.log(`Listening on port :${PORT}`);
+console.log(`Forecast API key: ${process.env.FORECAST_API_KEY}`);
 
 
 function constructReply(incoming) {

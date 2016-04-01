@@ -8,7 +8,6 @@
     "before": false,
     "console": false,
     "describe": false,
-    "React": false,
     "it": false
   },
   "node": true,

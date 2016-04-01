@@ -4,7 +4,6 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <script src="components/react/react.js"></script>
   <script src="client.js"></script>
   <title>MailWeather</title>
 
@@ -36,10 +35,17 @@
 
 <body unresolved>
   <h1>MailWeather</h1>
-  <div id="app"></div>
-  <pre id="forecast">
-<!-- Forecast goes here -->
-  </pre>
+  <form id="messageForm">
+    <p>
+      <span>From:</span>
+      <input id="fromField" type="text" value="">
+    </p>
+    <textarea id="bodyField" type="text">47.6329,-122.2800</textarea>
+    <p>
+      <input type="submit" value="Send">
+    </p>
+  </form>
+  <pre id="forecastContainer"></pre>
 </body>
 
 </html>
