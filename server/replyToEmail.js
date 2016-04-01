@@ -28,15 +28,22 @@ function replyToEmail(originalMessage, reply) {
     subject: reply.subject,
     text: reply.body
   };
-  console.log(`Sending message`);
   console.log(JSON.stringify(message, null, 2));
-  return Promise.resolve();
-  // transport.sendMail(message, function(error, info){
-  //   if (error) {
-  //     return console.log(error);
-  //   }
-  //   console.log(`Message sent: ${info.response}`);
-  // });
+  if (process.env.SEND_MAIL === 'false') {
+    console.log("(Skipped sending message)");
+    return Promise.resolve();
+  } else {
+    console.log("Sending message");
+    return new Promise((resolve, reject) => {
+      transport.sendMail(message, (error, info) => {
+        if (error) {
+          reject(error);
+        }
+        console.log(`Message sent: ${info.response}`);
+        resolve();
+      });
+    });
+  }
 }
 
 
