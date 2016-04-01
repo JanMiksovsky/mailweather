@@ -4,8 +4,7 @@
 
 'use strict';
 
-
-let REPLY_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
+const REPLY_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
 
 let nodemailer = require('nodemailer');
 
@@ -21,7 +20,7 @@ let transport = nodemailer.createTransport({
 });
 
 
-function replyToEmail(originalMessage, reply) {
+function sendReply(originalMessage, reply) {
   let message = {
     from: REPLY_FROM,
     to: originalMessage.from,
@@ -29,7 +28,7 @@ function replyToEmail(originalMessage, reply) {
     text: reply.body
   };
   console.log(JSON.stringify(message, null, 2));
-  if (process.env.SEND_MAIL === 'false') {
+  if (process.env.SEND_MESSAGE === 'false') {
     console.log("(Skipped sending message)");
     return Promise.resolve();
   } else {
@@ -47,4 +46,6 @@ function replyToEmail(originalMessage, reply) {
 }
 
 
-module.exports = replyToEmail;
+module.exports = {
+  sendReply
+};

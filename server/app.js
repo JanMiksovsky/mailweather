@@ -6,8 +6,8 @@ let bodyParser = require('body-parser');
 let parseLocation = require('../server/parseLocation');
 let forecastIo = require('./forecastIo');
 let formatForecast = require('./formatForecast');
-let replyToEmail = require('./replyToEmail');
-// let replyToDeLorme = require('./replyToDeLorme');
+let email = require('./email');
+let deLorme = require('./deLorme');
 
 let PORT = process.env.PORT || 8000;
 
@@ -24,10 +24,9 @@ app.post('/message', (request, response) => {
   constructReply(location)
   .then(reply => {
     responseContent = reply.body;
-    // return isDeLormeMessage(incoming.body) ?
-    //   replyToDeLorme(incoming, replyBody) :
-    //   replyToEmail(incoming, replyBody);
-    return replyToEmail(incoming, reply);
+    return deLorme.isDeLormeMessage(incoming) ?
+      deLorme.sendReply(incoming, reply) :
+      email.sendReply(incoming, reply);
   })
   .then(() => {
     // Return the reply content as the response.
@@ -63,9 +62,6 @@ function constructReply(location) {
   });
 }
 
-function isDeLormeMessage(message) {
-  return message.from && message.from.endsWith('delorme.com');
-}
 
 function parseMessageRequest(request) {
   return {
