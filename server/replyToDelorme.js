@@ -1,6 +1,7 @@
 'use strict';
 
 let $ = require('cheerio');
+// let querystring = require('querystring');
 
 function extractInfoFromWebPage(html) {
   let page = $(html);
@@ -32,4 +33,22 @@ function extractInfoFromEmail(email) {
 module.exports = {
   extractInfoFromWebPage: extractInfoFromWebPage,
   extractUrlFromEmail: extractUrlFromEmail
+};
+
+function parseDeLormeSender(body) {
+  let senderRegex = /&adr=([^\s&]+)/;
+  let match = body.match(senderRegex);
+  return match ?
+    querystring.unescape(match[1]) :
+    null;
+}
+
+
+function isDeLormeMessage(message) {
+  return message.from && message.from.endsWith('delorme.com');
+}
+
+
+module.exports = {
+  isDeLormeMessage
 };

@@ -2,7 +2,7 @@
 
 let assert = require('chai').assert;
 let sample = require('./sample');
-let delorme = require('../server/delorme');
+let delorme = require('../server/replyToDeLorme');
 
 describe('DeLorme handler', () => {
 
