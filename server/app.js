@@ -19,15 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.post('/message', (request, response) => {
   let incoming = parseMessageRequest(request);
   let location = incoming.body && parseLocation(incoming.body);
-  console.log(`Received message from :\n${incoming.from})`);
+  console.log(`Received message from ${incoming.from}`);
   let responseContent;
   constructReply(location)
-  .then(replyBody => {
-    responseContent = replyBody;
+  .then(reply => {
+    responseContent = reply.body;
     // return isDeLormeMessage(incoming.body) ?
     //   replyToDeLorme(incoming, replyBody) :
     //   replyToEmail(incoming, replyBody);
-    return replyToEmail(incoming, replyBody);
+    return replyToEmail(incoming, reply);
   })
   .then(() => {
     // Return the reply content as the response.
@@ -35,6 +35,7 @@ app.post('/message', (request, response) => {
     response.send(responseContent);
   })
   .catch(error => {
+    console.log(error.stack);
     response.send(`${error}\n\n${incoming.body}`);
   });
 });
@@ -47,11 +48,9 @@ console.log(`Forecast API key: ${process.env.FORECAST_API_KEY}`);
 
 
 function constructReply(location) {
-
   if (!location) {
     throw "No location could be found.";
   }
-
   // Return formatted forecast for location.
   return forecastIo.getForecast(location)
   .then(forecast => {
@@ -70,7 +69,7 @@ function isDeLormeMessage(message) {
 
 function parseMessageRequest(request) {
   return {
-    from: request.body.html || request.body.plain,
-    body: (request.envelope && request.envelope.from) || request.body.from
+    from: (request.envelope && request.envelope.from) || request.body.from,
+    body: request.body.html || request.body.plain
   };
 }

@@ -2,6 +2,9 @@
  * Send an email message
  */
 
+'use strict';
+
+
 let REPLY_FROM = 'MailWeather <5237dc9b94b1dcd5ddd1@cloudmailin.net>';
 
 let nodemailer = require('nodemailer');
@@ -18,17 +21,16 @@ let transport = nodemailer.createTransport({
 });
 
 
-function replyToEmail(originalMessage, replyBody) {
-  let replyTo = originalMessage.from;
-  let replySubject = `RE: ${originalMessage.subject}`;
+function replyToEmail(originalMessage, reply) {
   let message = {
     from: REPLY_FROM,
-    to: replyTo,
-    subject: replySubject,
-    text: replyBody
+    to: originalMessage.from,
+    subject: reply.subject,
+    text: reply.body
   };
-  console.log(`Sending message to ${replyTo}`);
+  console.log(`Sending message`);
   console.log(JSON.stringify(message, null, 2));
+  return Promise.resolve();
   // transport.sendMail(message, function(error, info){
   //   if (error) {
   //     return console.log(error);

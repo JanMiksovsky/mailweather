@@ -6,8 +6,6 @@
 'use strict';
 
 let request = require('request-promise');
-let formatForecast = require('./formatForecast');
-
 
 /*
  * Return a promise for a weather forecast for the given location.
@@ -22,8 +20,7 @@ function getForecast(location) {
   .then(function(response) {
     let forecast = JSON.parse(response);
     console.log("Got forecast");
-    let formatted = formatForecast(forecast);
-    return formatted;
+    return forecast;
   });
 }
 
