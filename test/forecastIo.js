@@ -7,22 +7,6 @@ let forecastIo = require('../server/forecastIo');
 
 describe('ForecastIO', () => {
 
-  it("formats forecast from sample data", done => {
-    let actual;
-    sample.getForecast()
-    .then(forecast => {
-      actual = forecastIo.format(forecast);
-      return sample.getFile('forecast.txt');
-    })
-    .then(expected => {
-      assert.equal(actual, expected);
-      done();
-    })
-    .catch(err => {
-      done(err);
-    });
-  });
-
   it("calls forecast.io result", done => {
     sample.getForecast()
     .then(data => {

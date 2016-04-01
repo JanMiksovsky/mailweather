@@ -1,12 +1,17 @@
+/*
+ * Integrate with Forecast.io.
+ */
+
+
 'use strict';
+
+let request = require('request-promise');
+let formatForecast = require('./formatForecast');
+
 
 /*
  * Return a promise for a weather forecast for the given location.
  */
-
-let request = require('request-promise');
-
-// Return a promise for a forecast from Forecast.io.
 function getForecast(location) {
   let apiKey = process.env.FORECAST_API_KEY;
   let latitude = location.latitude;
@@ -17,12 +22,9 @@ function getForecast(location) {
   .then(function(response) {
     let forecast = JSON.parse(response);
     console.log("Got forecast");
-    let formatted = format(forecast);
+    let formatted = formatForecast(forecast);
     return formatted;
   });
 }
 
-module.exports = {
-  format: format,
-  getForecast: getForecast
-};
+module.exports = { getForecast };

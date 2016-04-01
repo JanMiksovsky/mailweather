@@ -17,8 +17,17 @@ let transport = nodemailer.createTransport({
   }
 });
 
-function replyToEmail(message) {
-  console.log("[Sending message]");
+
+function replyToEmail(originalMessage, replyBody) {
+  let replyTo = originalMessage.from;
+  let replySubject = `RE: ${originalMessage.subject}`;
+  let message = {
+    from: REPLY_FROM,
+    to: replyTo,
+    subject: replySubject,
+    text: replyBody
+  };
+  console.log(`Sending message to ${replyTo}`);
   console.log(JSON.stringify(message, null, 2));
   // transport.sendMail(message, function(error, info){
   //   if (error) {
@@ -27,30 +36,6 @@ function replyToEmail(message) {
   //   console.log(`Message sent: ${info.response}`);
   // });
 }
-
-  let body;
-  constructReply(incoming)
-  .then(outgoing => {
-    body = outgoing.body;
-    if (outgoing.to) {
-      // Send email reply.
-      let subject = outgoing.subject;
-      let message = {
-          from: REPLY_FROM,
-          to: outgoing.to,
-          // subject: subject,
-          text: body
-      };
-      sendMessage(message);
-    }
-  //   return loadFile('/');
-  // })
-  // .then(html => {
-  //   // Splice in forecast.
-  //   let placeholder = '<!-- Forecast goes here -->';
-  //   html = html.replace(placeholder, body);
-  //   response.set('Content-Type', 'text/html');
-  //   response.send(html);
 
 
 module.exports = replyToEmail;

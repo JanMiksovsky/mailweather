@@ -3,6 +3,9 @@
  * text message.
  */
 
+'use strict';
+
+
 let MAX_MESSAGE_LENGTH = 160;
 
 let DAYS_OF_WEEK = [

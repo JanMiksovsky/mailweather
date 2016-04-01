@@ -4,7 +4,7 @@ let assert = require('chai').assert;
 let sample = require('./sample');
 let delorme = require('../server/replyToDeLorme');
 
-describe('DeLorme handler', () => {
+describe.skip('DeLorme handler', () => {
 
   it("extracts link from email", done => {
     sample.getFile('delorme.eml')

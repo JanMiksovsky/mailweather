@@ -24,15 +24,18 @@ app.post('/message', (request, response) => {
   constructReply(location)
   .then(replyBody => {
     responseContent = replyBody;
-    // return replyToDeLorme.isDeLormeMessage ?
+    // return isDeLormeMessage(incoming.body) ?
     //   replyToDeLorme(incoming, replyBody) :
     //   replyToEmail(incoming, replyBody);
     return replyToEmail(incoming, replyBody);
   })
   .then(() => {
     // Return the reply content as the response.
-    response.set('Content-Type', 'application/json');
+    // response.set('Content-Type', 'application/json');
     response.send(responseContent);
+  })
+  .catch(error => {
+    response.send(`${error}\n\n${incoming.body}`);
   });
 });
 
@@ -46,11 +49,7 @@ console.log(`Forecast API key: ${process.env.FORECAST_API_KEY}`);
 function constructReply(location) {
 
   if (!location) {
-    // No location found
-    return Promise.resolve({
-      subject: "Weather: no location found",
-      body: "No location could be found in the original message below."
-    });
+    throw "No location could be found.";
   }
 
   // Return formatted forecast for location.
@@ -63,6 +62,10 @@ function constructReply(location) {
       body: replyBody
     };
   });
+}
+
+function isDeLormeMessage(message) {
+  return message.from && message.from.endsWith('delorme.com');
 }
 
 function parseMessageRequest(request) {
