@@ -6,7 +6,6 @@ let parseLocation = require('../server/parseLocation');
 let forecastIo = require('./forecastIo');
 let nodemailer = require('nodemailer');
 let path = require('path');
-let fs = require('fs');
 let querystring = require('querystring');
 
 let PORT = process.env.PORT || 8000;
@@ -28,17 +27,6 @@ let app = express();
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-
-app.get('/', (request, response) => {
-  loadFile(request.path)
-  .then(html => {
-    response.set('Content-Type', 'text/html');
-    response.send(html);
-  })
-  .catch(err => {
-    console.error(err);
-  });
-});
 
 app.post('/message', (request, response) => {
   let incoming = parseMessageRequest(request);
@@ -98,28 +86,6 @@ function constructReply(incoming) {
       subject: `Weather for ${location.latitude},${location.longitude}`,
       body: outgoingBody
     };
-  });
-}
-
-/*
- * Return a promise for the file at the given path.
- */
-function loadFile(relativePath) {
-  if (relativePath === '/') {
-    relativePath = 'index.html';
-  }
-  let filePath = path.join(clientPath, relativePath);
-  console.log(filePath);
-  return new Promise(function(resolve, reject) {
-
-    fs.readFile(filePath, { encoding: 'utf8' }, function(err, data) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-
   });
 }
 
