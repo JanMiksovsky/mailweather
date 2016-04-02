@@ -17,6 +17,8 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.post('/message', (request, response) => {
+  console.log(`Received request at /message`);
+  console.log(JSON.stringify(request.envelope));
   let incoming = parseMessageRequest(request);
   let location = incoming.body && parseLocation(incoming.body);
   console.log(`Received message from ${incoming.from}`);
