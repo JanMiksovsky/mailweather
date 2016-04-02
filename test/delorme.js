@@ -1,6 +1,7 @@
 'use strict';
 
 let assert = require('chai').assert;
+let nock = require('nock');
 let sample = require('./sample');
 let deLorme = require('../server/deLorme');
 
@@ -14,8 +15,8 @@ describe('DeLorme handler', () => {
       assert.equal(url, 'https://explore.delorme.com/textmessage/txtmsg?mo=6cf76ee244ec40a0ab0170c05040102322740101&adr=jan%40miksovsky.com');
       done();
     })
-    .catch(err => {
-      done(err);
+    .catch(error => {
+      done(error);
     });
   });
 
@@ -27,9 +28,60 @@ describe('DeLorme handler', () => {
       assert.equal(info.MessageId, '32598084');
       done();
     })
-    .catch(err => {
-      done(err);
-    });
+    .catch(error => done(error));
+  });
+
+  it('posts to DeLorme endpoint', done => {
+    let data = {
+      Guid: 'Guid',
+      MessageId: 'MessageId',
+      ReplyAddress: 'ReplyAddress',
+      ReplyMessage: 'ReplyMessage'
+    };
+    nock('http://miksovsky.com')
+      .post('/TextMessage/TxtMsg')
+      .reply(201, {
+        ok: true
+      });
+    deLorme.postToDeLorme(data)
+    .then(response => {
+      assert(response.ok);
+      done();
+    })
+    .catch(error => done(error));
+  });
+
+  it('can reply to an email from a DeLorme device', done => {
+    let originalMessage;
+    sample.getFile('delorme.eml')
+    .then(body => {
+      originalMessage = { body };
+      return sample.getFile('delorme.html');
+    })
+    .then(html => {
+      // Mock response from DeLorme web server.
+      nock('https://explore.delorme.com')
+        .get('/textmessage/txtmsg')
+        .query(true) // Ignore query params
+        .reply(200, html);
+      // Mock response from DeLorme endpoint.
+      nock('http://miksovsky.com')
+        .post('/TextMessage/TxtMsg', {
+          ReplyMessage: "Forecast goes here"
+        })
+        .reply(201, {
+          ok: true
+        });
+      let replyMessage = {
+        body: "Forecast goes here"
+      };
+      return deLorme.sendReply(originalMessage, replyMessage);
+    })
+    .then(response => {
+      assert(response.ok);
+      done();
+    })
+    .catch(error => done(error));
   });
 
 });
