@@ -54,8 +54,7 @@ function constructReply(location) {
   console.log(`Getting forecast for ${location.latitude},${location.longitude}`);
   return forecastIo.getForecast(location)
   .then(forecast => {
-    let formatted = formatter.formatForecast(forecast);
-    let replyBody = `${formatted}\n\n${location.latitude},${location.longitude}`;
+    let replyBody = formatter.formatForecast(forecast);
     return {
       subject: `Weather for ${location.latitude},${location.longitude}`,
       body: replyBody

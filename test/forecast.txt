@@ -1,4 +1,3 @@
-Drizzle today, temps peak 90° Thu
 Mon
  9p 79°clear
 
@@ -12,5 +11,6 @@ Tue
  9p 75°
 
 Wed
- 5a 61°clear
- 6a 62°
+
+Drizzle today, temps peak 90° Thu
+47.633082,-122.280192

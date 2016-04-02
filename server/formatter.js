@@ -25,6 +25,7 @@ const ABBREVIATIONS = {
   " on ": " ",
   " the ": " ",
   " with ": " ",
+  " through ": "–",
   "Friday": "Fri",
   "Monday": "Mon",
   "Saturday": "Sat",
@@ -41,7 +42,6 @@ const ABBREVIATIONS = {
   "precipitation": "precip",
   "rising": "rise",
   "temperatures": "temps",
-  "through": "thru",
   "throughout": "thru"
 };
 
@@ -72,9 +72,9 @@ function addHourDataToCalendar(hourData, calendar) {
   };
 }
 
-// Clip the full text to fit in a 160 character text message, breaking at the
+// Clip the full text to fit in the given character limit, breaking at the
 // last full line that fits.
-function fitInTextMessage(full) {
+function fitLinesToLimit(full, characterLimit) {
   let lines = full.split('\n');
   let result = '';
   for (let line of lines) {
@@ -84,19 +84,18 @@ function fitInTextMessage(full) {
     }
     added = added + line;
     // console.log(`[${added.length}, ${line.length}]${line}`);
-    if (added.length > MAX_MESSAGE_LENGTH) {
+    if (added.length > characterLimit) {
       // Not enough room for everything.
       break;
     }
     result = added;
   }
-  // console.log(`[${result.length}]`);
-  // Entire message fit.
   return result;
 }
 
 // Format a Forecast.io forecast for human presentation.
 function formatForecast(forecast) {
+  // Format calendar.
   let calendar = new Map();
   forecast.hourly.data.forEach(function(hourData) {
     addHourDataToCalendar(hourData, calendar);
@@ -104,10 +103,18 @@ function formatForecast(forecast) {
   forecast.daily.data.forEach(function(dayData) {
     addDailyDataToCalendar(dayData, calendar);
   });
+
+  // Format message outro (bottom).
   let formattedSummary = abbreviate(forecast.daily.summary);
-  let text = `${formattedSummary}\n`;
-  text += formatCalendar(calendar);
-  let result = fitInTextMessage(text);
+  let outro = `\n\n${formattedSummary}\n${forecast.latitude},${forecast.longitude}`;
+
+  // Fit the calendar into the room remaining.
+  let formattedCalendar = formatCalendar(calendar);
+  let roomForCalendar = MAX_MESSAGE_LENGTH - outro.length;
+  let fitCalendar = fitLinesToLimit(formattedCalendar, roomForCalendar);
+
+  // Combine calendar and outro.
+  let result = fitCalendar + outro;
   return result;
 }
 
