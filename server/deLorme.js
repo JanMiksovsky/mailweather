@@ -25,6 +25,10 @@ function sendReply(originalMessage, reply) {
     data.ReplyAddress = REPLY_FROM;
     data.ReplyMessage = reply.body;
     return postToDeLorme(data);
+  })
+  .then(result => {
+    console.log("Successfully posted to DeLorme");
+    console.log(JSON.stringify(result, null, 2));
   });
 }
 
@@ -48,12 +52,13 @@ function parseDeLormePage(html) {
 }
 
 function postToDeLorme(data) {
+  console.log("Preparing post to DeLorme");
   console.log(JSON.stringify(data, null, 2));
   if (process.env.SEND_MESSAGE === 'false') {
-    console.log("(Skipped sending to DeLorme)");
-    return Promise.resolve();
+    console.log("(Skipped posting to DeLorme)");
+    return Promise.resolve({ ok: true });
   } else {
-    console.log("Sending to DeLorme");
+    console.log("Posting to DeLorme");
     return request({
       method: 'POST',
       uri: DELORME_ENDPOINT,

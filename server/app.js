@@ -5,7 +5,7 @@ let express = require('express');
 let bodyParser = require('body-parser');
 let parseLocation = require('../server/parseLocation');
 let forecastIo = require('./forecastIo');
-let formatForecast = require('./formatForecast');
+let formatter = require('./formatter');
 let email = require('./email');
 let deLorme = require('./deLorme');
 
@@ -30,7 +30,7 @@ app.post('/message', (request, response) => {
   })
   .then(() => {
     // Return the reply content as the response.
-    // response.set('Content-Type', 'application/json');
+    console.log("Completed servicing request");
     response.send(responseContent);
   })
   .catch(error => {
@@ -51,9 +51,10 @@ function constructReply(location) {
     throw "No location could be found.";
   }
   // Return formatted forecast for location.
+  console.log(`Getting forecast for ${location.latitude},${location.longitude}`);
   return forecastIo.getForecast(location)
   .then(forecast => {
-    let formatted = formatForecast(forecast);
+    let formatted = formatter.formatForecast(forecast);
     let replyBody = `${formatted}\n\n${location.latitude},${location.longitude}`;
     return {
       subject: `Weather for ${location.latitude},${location.longitude}`,

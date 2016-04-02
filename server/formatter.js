@@ -6,9 +6,9 @@
 'use strict';
 
 
-let MAX_MESSAGE_LENGTH = 160;
+const MAX_MESSAGE_LENGTH = 160;
 
-let DAYS_OF_WEEK = [
+const DAYS_OF_WEEK = [
   'Sun',
   'Mon',
   'Tue',
@@ -16,17 +16,10 @@ let DAYS_OF_WEEK = [
   'Thu',
   'Fri',
   'Sat'
-  // 'SUN',
-  // 'MON',
-  // 'TUE',
-  // 'WED',
-  // 'THU',
-  // 'FRI',
-  // 'SAT'
 ];
 
-let ABBREVIATIONS = {
-  ".": "",
+const ABBREVIATIONS = {
+  "\\.": "",
   "°F": "°",
   " at ": " ",
   " on ": " ",
@@ -48,22 +41,19 @@ let ABBREVIATIONS = {
   "precipitation": "precip",
   "rising": "rise",
   "temperatures": "temps",
+  "through": "thru",
   "throughout": "thru"
-  // "cloudy": "",
-  // "fog": "",
-  // "rain": "",
-  // "sleet": "",
-  // "snow": "",
-  // "wind": "",
 };
 
 function abbreviate(text) {
   let result = text;
   for (let key of Object.keys(ABBREVIATIONS)) {
-    result = result.replace(key, ABBREVIATIONS[key]);
+    let regex = new RegExp(key, 'g');
+    result = result.replace(regex, ABBREVIATIONS[key]);
   }
   return result;
 }
+
 
 function addDailyDataToCalendar(dailyData, calendar) {
   let date = getDateFromForecastTime(dailyData.time);
@@ -208,4 +198,7 @@ function getDayFromDate(date) {
 }
 
 
-module.exports = formatForecast;
+module.exports = {
+  abbreviate,
+  formatForecast
+};
