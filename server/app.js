@@ -67,7 +67,7 @@ function constructReply(location) {
 
 function parseMessageRequest(request) {
   return {
-    from: (request.envelope && request.envelope.from) || request.body.from,
+    from: (request.body.envelope && request.body.envelope.from) || request.body.from,
     body: request.body.html || request.body.plain
   };
 }
