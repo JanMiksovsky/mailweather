@@ -6,8 +6,8 @@
 
 const REPLY_FROM = 'weather@miksovsky.com';
 const DELORME_DOMAIN = 'delorme.com';
-// const DELORME_ENDPOINT = 'https://explore.delorme.com/TextMessage/TxtMsg';
-const DELORME_ENDPOINT = 'http://miksovsky.com/TextMessage/TxtMsg';
+const DELORME_ENDPOINT = 'https://explore.delorme.com/TextMessage/TxtMsg';
+// const DELORME_ENDPOINT = 'http://miksovsky.com/TextMessage/TxtMsg';
 
 let request = require('request-promise');
 let $ = require('cheerio');

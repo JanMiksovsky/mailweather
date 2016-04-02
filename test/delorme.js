@@ -5,6 +5,9 @@ let nock = require('nock');
 let sample = require('./sample');
 let deLorme = require('../server/deLorme');
 
+const DELORME_ENDPOINT_HOST = 'https://explore.delorme.com';
+// const DELORME_ENDPOINT_HOST = 'http://miksovsky.com';
+
 describe('DeLorme handler', () => {
 
   it("extracts link from email", done => {
@@ -38,7 +41,7 @@ describe('DeLorme handler', () => {
       ReplyAddress: 'ReplyAddress',
       ReplyMessage: 'ReplyMessage'
     };
-    nock('http://miksovsky.com')
+    nock(DELORME_ENDPOINT_HOST)
       .post('/TextMessage/TxtMsg')
       .reply(201, {
         ok: true
@@ -65,7 +68,7 @@ describe('DeLorme handler', () => {
         .query(true) // Ignore query params
         .reply(200, html);
       // Mock response from DeLorme endpoint.
-      nock('http://miksovsky.com')
+      nock(DELORME_ENDPOINT_HOST)
         .post('/TextMessage/TxtMsg', {
           ReplyMessage: "Forecast goes here"
         })
