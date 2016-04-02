@@ -34,11 +34,11 @@ function sendReply(originalMessage, reply) {
   } else {
     console.log("Sending message");
     return new Promise((resolve, reject) => {
-      transport.sendMail(message, (error, info) => {
+      transport.sendMail(message, (error, response) => {
         if (error) {
           reject(error);
         }
-        console.log(`Message sent: ${info.response}`);
+        console.log(`Message sent: ${JSON.stringify(response, null, 2)}`);
         resolve();
       });
     });

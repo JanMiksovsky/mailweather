@@ -6,7 +6,7 @@
 'use strict';
 
 
-const MAX_MESSAGE_LENGTH = 160;
+const MAX_MESSAGE_LENGTH = 147; // DeLorme seems to only take this many chars?
 
 const DAYS_OF_WEEK = [
   'Sun',
