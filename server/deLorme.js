@@ -5,7 +5,10 @@
 'use strict';
 
 const REPLY_FROM = 'weather@miksovsky.com';
-const DELORME_DOMAIN = 'delorme.com';
+const DELORME_DOMAINS = [
+  'delorme.com',
+  'sendgrid.net'  // Apparent DeLorme service provider
+];
 const DELORME_ENDPOINT = 'https://explore.delorme.com/TextMessage/TxtMsg';
 // const DELORME_ENDPOINT = 'http://miksovsky.com/TextMessage/TxtMsg';
 
@@ -40,7 +43,8 @@ function extractUrlFromEmail(message) {
 }
 
 function isDeLormeMessage(message) {
-  return message.from && message.from.endsWith(DELORME_DOMAIN);
+  let address = message.from;
+  return address && DELORME_DOMAINS.some(domain => address.endsWith(domain));
 }
 
 function parseDeLormePage(html) {

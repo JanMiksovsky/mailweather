@@ -10,6 +10,12 @@ const DELORME_ENDPOINT_HOST = 'https://explore.delorme.com';
 
 describe('DeLorme handler', () => {
 
+  it("identifies DeLorme domains", () => {
+    assert(deLorme.isDeLormeMessage({ from: 'foo@delorme.com' }));
+    assert(deLorme.isDeLormeMessage({ from: 'foo@sendgrid.net' }));
+    assert(!deLorme.isDeLormeMessage({ from: 'foo@example.com' }));
+  });
+
   it("extracts link from email", done => {
     sample.getFile('delorme.eml')
     .then(body => {
