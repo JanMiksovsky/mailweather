@@ -29,6 +29,7 @@ function sendReply(originalMessage, reply) {
   .then(result => {
     console.log("Successfully posted to DeLorme");
     console.log(JSON.stringify(result, null, 2));
+    return result;
   });
 }
 
