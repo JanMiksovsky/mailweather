@@ -21,6 +21,7 @@ const DAYS_OF_WEEK = [
 const ABBREVIATIONS = {
   "\\.": "",
   "°F": "°",
+  " and ": "+",
   " at ": " ",
   " on ": " ",
   " the ": " ",
@@ -106,7 +107,9 @@ function formatForecast(forecast) {
 
   // Format message outro (bottom).
   let formattedSummary = abbreviate(forecast.daily.summary);
-  let outro = `\n\n${formattedSummary}\n${forecast.latitude},${forecast.longitude}`;
+  let formattedLatitude = formatFloat(forecast.latitude);
+  let formattedLongitude = formatFloat(forecast.longitude);
+  let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}`;
 
   // Fit the calendar into the room remaining.
   let formattedCalendar = formatCalendar(calendar);
@@ -152,6 +155,10 @@ function formatCalendarDay(calendarDay) {
   });
   result += formattedHours.join('\n');
   return result;
+}
+
+function formatFloat(float) {
+  return Math.round(float * 100) / 100;
 }
 
 function formatHour(hour, temperature, icon) {
