@@ -21,15 +21,19 @@ let transport = nodemailer.createTransport({
 
 
 function sendReply(originalMessage, reply) {
+  let to = originalMessage.from;
   let message = {
     from: REPLY_FROM,
-    to: originalMessage.from,
+    to: to,
     subject: reply.subject,
     text: reply.body
   };
   console.log(JSON.stringify(message, null, 2));
   if (process.env.SEND_MESSAGE === 'false') {
-    console.log("(Skipped sending message)");
+    console.log("[Reply sending disabled through environment variable]");
+    return Promise.resolve();
+  } else if (to.indexOf('noreply') >= 0 || to.indexOf('no.reply') >= 0 || to.indexOf('no-reply') >= 0) {
+    console.log("[Skipping reply to 'no reply' address]");
     return Promise.resolve();
   } else {
     console.log("Sending message");
