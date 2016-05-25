@@ -8,6 +8,9 @@ Tue
  3p 85°clear
  4p 87°
  6p 84°
+ 9p 75°
+
+Wed
 
 Drizzle today, temps peak 90° Thu
-47.633082,-122.280192
+47.63,-122.28
