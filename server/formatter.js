@@ -34,6 +34,7 @@ const ABBREVIATIONS = {
   "Thursday": "Thu",
   "Tuesday": "Tue",
   "Wednesday": "Wed",
+  "bottoming": "bottom",
   "clear-day": "clear",
   "clear-night": "clear",
   "falling": "fall",
@@ -114,8 +115,7 @@ function formatForecast(forecast) {
   let formattedSummary = abbreviate(forecast.daily.summary);
   let formattedLatitude = formatFloat(forecast.latitude);
   let formattedLongitude = formatFloat(forecast.longitude);
-  let adjustedDate = getDateFromForecastTime(forecast, forecast.currently.time);
-  let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}\n${adjustedDate}`;
+  let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}`;
 
   // Fit the calendar into the room remaining.
   let formattedCalendar = formatCalendar(calendar);
