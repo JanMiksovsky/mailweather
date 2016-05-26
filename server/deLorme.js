@@ -61,7 +61,7 @@ function postToDeLorme(data) {
   console.log(JSON.stringify(data, null, 2));
   if (process.env.SEND_MESSAGE === 'false') {
     console.log("(Skipped posting to DeLorme)");
-    return Promise.resolve({ ok: true });
+    return Promise.resolve({ Success: true });
   } else {
     console.log("Posting to DeLorme");
     return request({

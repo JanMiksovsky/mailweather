@@ -50,11 +50,11 @@ describe('DeLorme handler', () => {
     nock(DELORME_ENDPOINT_HOST)
       .post('/TextMessage/TxtMsg')
       .reply(201, {
-        ok: true
+        Success: true
       });
     deLorme.postToDeLorme(data)
     .then(response => {
-      assert(response.ok);
+      assert(response.Success);
       done();
     })
     .catch(error => done(error));
@@ -79,7 +79,7 @@ describe('DeLorme handler', () => {
           ReplyMessage: "Forecast goes here"
         })
         .reply(201, {
-          ok: true
+          Success: true
         });
       let replyMessage = {
         body: "Forecast goes here"
@@ -87,7 +87,7 @@ describe('DeLorme handler', () => {
       return deLorme.sendReply(originalMessage, replyMessage);
     })
     .then(response => {
-      assert(response.ok);
+      assert(response.Success);
       done();
     })
     .catch(error => done(error));
