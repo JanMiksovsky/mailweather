@@ -164,24 +164,25 @@ function formatCalendarDay(calendarDay) {
   return result;
 }
 
-function formatFloat(float) {
-  return Math.round(float * 100) / 100;
-}
+// function formatFloat(float) {
+//   return Math.round(float * 100) / 100;
+// }
 
 function formatHour(hour, temperature, icon) {
   let meridiem = hour < 12 ? 'a' : 'p';
-  let formattedHour = hour % 12;
-  if (formattedHour === 0) {
-    formattedHour = 12;
-  } else if (formattedHour < 10) {
-    formattedHour = ` ${formattedHour}`;
+  let halfDayHour = hour % 12;
+  if (halfDayHour === 0) {
+    halfDayHour = 12;
   }
+  let formattedHour = leftPad(String(halfDayHour), 2, ' ');
+
   // We round the temperature to the nearest integer. Forecast.io appears to
   // do something more complex, sometimes (but not always?) rounding down for
   // fractions above .5. So our forecasts won't agree precisely.
-  let formattedTemperature = Math.round(temperature);
+  let roundedTemperature = Math.round(temperature);
+  let formattedTemperature = leftPad(String(roundedTemperature), 3, ' ');
   let formattedIcon = icon || '';
-  return `${formattedHour}${meridiem} ${formattedTemperature}°${formattedIcon}`;
+  return `${formattedHour}${meridiem}${formattedTemperature}°${formattedIcon}`;
 }
 
 function formatIcon(icon) {
@@ -228,6 +229,13 @@ function getDayFromDate(date) {
   day.setSeconds(0);
   day.setMilliseconds(0);
   return day;
+}
+
+function leftPad(text, desiredLength, character) {
+  let padLength = desiredLength - text.length;
+  return padLength > 0 ?
+    character.repeat(padLength) + text :
+    text;
 }
 
 
