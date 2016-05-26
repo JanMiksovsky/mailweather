@@ -46,6 +46,12 @@ const ABBREVIATIONS = {
   "throughout": "thru"
 };
 
+let tempDate = new Date();
+const MILLISECONDS_PER_MINUTE = 60 * 1000;
+const MILLISECONDS_PER_HOUR = 60 * 60 * 1000;
+const SERVER_TIMEZONE_OFFSET_MILLISECONDS = tempDate.getTimezoneOffset() * MILLISECONDS_PER_MINUTE;
+
+
 function abbreviate(text) {
   let result = text;
   for (let key of Object.keys(ABBREVIATIONS)) {
@@ -55,16 +61,15 @@ function abbreviate(text) {
   return result;
 }
 
-
-function addDailyDataToCalendar(dailyData, calendar) {
-  let date = getDateFromForecastTime(dailyData.time);
+function addDailyDataToCalendar(forecast, dailyData, calendar) {
+  let date = getDateFromForecastTime(forecast, dailyData.time);
   let calendarDay = getCalendarDayForDate(calendar, date);
-  calendarDay.temperatureMaxHour = getDateFromForecastTime(dailyData.temperatureMaxTime).getHours();
-  calendarDay.temperatureMinHour = getDateFromForecastTime(dailyData.temperatureMinTime).getHours();
+  calendarDay.temperatureMaxHour = getDateFromForecastTime(forecast, dailyData.temperatureMaxTime).getHours();
+  calendarDay.temperatureMinHour = getDateFromForecastTime(forecast, dailyData.temperatureMinTime).getHours();
 }
 
-function addHourDataToCalendar(hourData, calendar) {
-  let date = getDateFromForecastTime(hourData.time);
+function addHourDataToCalendar(forecast, hourData, calendar) {
+  let date = getDateFromForecastTime(forecast, hourData.time);
   let calendarDay = getCalendarDayForDate(calendar, date);
   let hour = date.getHours();
   calendarDay.hours[hour] = {
@@ -99,10 +104,10 @@ function formatForecast(forecast) {
   // Format calendar.
   let calendar = new Map();
   forecast.hourly.data.forEach(function(hourData) {
-    addHourDataToCalendar(hourData, calendar);
+    addHourDataToCalendar(forecast, hourData, calendar);
   });
-  forecast.daily.data.forEach(function(dayData) {
-    addDailyDataToCalendar(dayData, calendar);
+  forecast.daily.data.forEach(function(dailyData) {
+    addDailyDataToCalendar(forecast, dailyData, calendar);
   });
 
   // Format message outro (bottom).
@@ -197,8 +202,20 @@ function getCalendarDayForDate(calendar, date) {
   return calendarDay;
 }
 
-function getDateFromForecastTime(time) {
-  return new Date(time * 1000);
+// Return a JavaScript Date for the given UTC time, offsetting by the time zone
+// specified by the forecast.
+function getDateFromForecastTime(forecast, time) {
+
+  let timeMilliseconds = time * 1000;
+
+  // The forecast timezone offset has the opposite sign of the offset we get
+  // back from JavaScript's getTimezoneOffset.
+  let forecastOffsetHours = -forecast.offset;
+  let forecastOffsetMilliseconds = forecastOffsetHours * MILLISECONDS_PER_HOUR;
+
+  let adjustedMilliseconds = timeMilliseconds + SERVER_TIMEZONE_OFFSET_MILLISECONDS - forecastOffsetMilliseconds;
+  let adjustedDate = new Date(adjustedMilliseconds);
+  return adjustedDate;
 }
 
 // Return midnight on the given date.
