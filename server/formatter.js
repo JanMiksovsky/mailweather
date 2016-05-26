@@ -113,9 +113,10 @@ function formatForecast(forecast) {
 
   // Format message outro (bottom).
   let formattedSummary = abbreviate(forecast.daily.summary);
-  let formattedLatitude = formatFloat(forecast.latitude);
-  let formattedLongitude = formatFloat(forecast.longitude);
-  let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}`;
+  // let formattedLatitude = formatFloat(forecast.latitude);
+  // let formattedLongitude = formatFloat(forecast.longitude);
+  // let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}`;
+  let outro = `\n\n${formattedSummary}`;
 
   // Fit the calendar into the room remaining.
   let formattedCalendar = formatCalendar(calendar);
