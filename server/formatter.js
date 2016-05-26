@@ -46,10 +46,10 @@ const ABBREVIATIONS = {
   "throughout": "thru"
 };
 
-let tempDate = new Date();
 const MILLISECONDS_PER_MINUTE = 60 * 1000;
 const MILLISECONDS_PER_HOUR = 60 * 60 * 1000;
-const SERVER_TIMEZONE_OFFSET_MILLISECONDS = tempDate.getTimezoneOffset() * MILLISECONDS_PER_MINUTE;
+let serverOffsetMinutes = (new Date()).getTimezoneOffset();
+const SERVER_TIMEZONE_OFFSET_MILLISECONDS = serverOffsetMinutes * MILLISECONDS_PER_MINUTE;
 
 
 function abbreviate(text) {
@@ -114,7 +114,8 @@ function formatForecast(forecast) {
   let formattedSummary = abbreviate(forecast.daily.summary);
   let formattedLatitude = formatFloat(forecast.latitude);
   let formattedLongitude = formatFloat(forecast.longitude);
-  let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}`;
+  let adjustedDate = getDateFromForecastTime(forecast, forecast.currently.time);
+  let outro = `\n\n${formattedSummary}\n${formattedLatitude},${formattedLongitude}\n${adjustedDate}`;
 
   // Fit the calendar into the room remaining.
   let formattedCalendar = formatCalendar(calendar);
