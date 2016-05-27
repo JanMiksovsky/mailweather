@@ -142,6 +142,7 @@ function formatCalendar(calendar) {
 }
 
 function formatCalendarDay(calendarDay) {
+
   let day = calendarDay.day;
   let dayOfWeek = DAYS_OF_WEEK[day.getDay()];
   let result = `${dayOfWeek}\n`;
@@ -162,7 +163,14 @@ function formatCalendarDay(calendarDay) {
       previousIcon = icon;
     }
   });
-  result += formattedHours.join('\n');
+
+  if (formattedHours.length > 0) {
+    result += formattedHours.join('\n');
+  } else {
+    // No hours ended up in the day, so we'll render it as an empty string.
+    result = '';
+  }
+  
   return result;
 }
 
